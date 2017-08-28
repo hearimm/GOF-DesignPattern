@@ -1,0 +1,15 @@
+{
+  "name": "flybook",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "docs": "flybook docs --outdir=out"
+    "pages": "gh-pages -d out"
+  },
+  "devDependencies": {
+    "flybook": "^1.4.5",
+    "gh-pages": "^1.0.0"
+  },
+  "dependencies": {}
+}
