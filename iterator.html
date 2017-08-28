@@ -9,7 +9,11 @@
 
 이터레이터 패턴
 
-Basic Content"
+여행정보를 제공받는다고 할때, 
+
+고객사와 제공회사가 다르다고 할 경우 고객이 forloop를 자료구조에 따라 바꾸지 않아도 됨.
+
+고객사"
       />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -17,10 +21,10 @@ Basic Content"
         href="//fonts.googleapis.com/css?family=Rubik|Unica+One"
         rel="stylesheet"
       />
-      <link rel="stylesheet" href="./static/css/normalize.css?0a55d3ee6249b4b3" />
-      <link rel="stylesheet" href="./static/css/flexboxgrid.min.css?0a55d3ee6249b4b3" />
-      <link rel="stylesheet" href="./static/css/github-flavored-markdown.css?0a55d3ee6249b4b3" />
-      <link rel="stylesheet" href="./static/css/light.css?0a55d3ee6249b4b3" />
+      <link rel="stylesheet" href="./static/css/normalize.css?f716fc21cb94636e" />
+      <link rel="stylesheet" href="./static/css/flexboxgrid.min.css?f716fc21cb94636e" />
+      <link rel="stylesheet" href="./static/css/github-flavored-markdown.css?f716fc21cb94636e" />
+      <link rel="stylesheet" href="./static/css/light.css?f716fc21cb94636e" />
       <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
       <style>
         body, .markdown-body {
@@ -28,11 +32,127 @@ Basic Content"
         }
       </style>
       <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-      <script src="./static/main.js?0a55d3ee6249b4b3"></script>
+      <script src="./static/main.js?f716fc21cb94636e"></script>
       <body>
         <div id="root"><div class="wrap container-fluid"><header class="site-header"><h1><a href="/">flybook</a></h1><nav class="nav-link"><a href="/">Home</a><a href="">Git</a><a href="#" class="more"><svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg></a></nav></header><section class="row main"><aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><div class="chap"><span class="chap-title"></span><ul><li class=""><a href="./adaptor.html">Adaptor</a></li><li class="active"><a href="./iterator.html">Iterator</a></li></ul></div></aside><article class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><div class="markdown-body"><h2 id="iterator-패턴"><a href="#iterator-%ED%8C%A8%ED%84%B4" aria-hidden="true"><span class="icon icon-link"></span></a>Iterator 패턴</h2>
 <p>이터레이터 패턴</p>
-<p>Basic Content</p>
+<p>여행정보를 제공받는다고 할때, </p>
+<p>고객사와 제공회사가 다르다고 할 경우 고객이 forloop를 자료구조에 따라 바꾸지 않아도 됨.</p>
+<p>고객사에게 캡슐화 되어 넘어감. 알필요도 없고 공통성격이라 좋고 일석이조...?</p>
+<p>제공회사가 사정에 의해 자료구조를 바꿨다고 할 경우...난감.(ex:고객사가 1000개)</p>
+<pre><code>기대결과
+----Suwon----
+광교산
+수원성
+중평떡
+수원갈비
+----Seoul----
+경복궁
+한강
+뭐가있지?
+----Busan----
+광안리 해수욕장
+해운대 해수욕장
+돼지국밥
+</code></pre>
+<p><strong>고객코드</strong></p>
+<pre><code class="language-java">public class Client {
+
+    public static void main(String[] args) {
+        
+        Aggregate suwon = new Suwon();
+        Aggregate seoul = new Seoul();
+        Aggregate busan = new Busan();
+        
+        //수원명소 
+        System.out.println("----Suwon----");
+        print(suwon.iterator());
+        //서울명소
+        System.out.println("----Seoul----");
+        print(seoul.iterator());
+        //부산명소
+        System.out.println("----Busan----");
+        print(busan.iterator());
+        
+    }
+    
+    public static void print(IteratorFunc it) {
+        while(it.hasNext()) {
+            System.out.println(it.next().toString());
+        }
+    }
+
+}
+</code></pre>
+<p><strong>Aggregate.java</strong></p>
+<pre><code class="language-java">//인터페이스 Iterator기능을 포함하도록 설정
+public interface Aggregate {
+    public IteratorFunc iterator();
+}
+</code></pre>
+<p><strong>Suwon.java</strong></p>
+<pre><code class="language-java">import java.util.ArrayList;
+import java.util.List;
+
+public class Suwon implements Aggregate {
+    List&#x3C;String> listStr;
+    public Suwon() {
+        listStr = new ArrayList&#x3C;String>();
+        listStr.add("광교산");
+        listStr.add("수원성");
+        listStr.add("중평떡");
+        listStr.add("수원갈비");
+    }
+    @Override
+    public IteratorFunc iterator() {
+        return new SuwonIterator(this);
+    }
+
+}
+</code></pre>
+<p><strong>Iterator</strong></p>
+<pre><code class="language-java">//임의로 만들어본 Iterator 기능 Interface
+interface IteratorFunc {
+    public Object next();
+    public boolean hasNext();
+}
+</code></pre>
+<p><strong>Iterator 구현</strong></p>
+<pre><code class="language-java">//Suwon ArrayList 기능에 맞춘 인터페이스 구현impl
+public class SuwonIterator implements IteratorFunc {
+    Suwon suwon;
+    int index;
+    
+    public SuwonIterator(Suwon suwon) {
+        this.suwon = suwon;
+        this.index = 0;
+    }
+    
+    @Override
+    public Object next() {
+        String x = suwon.listStr.get(index);
+        index ++;
+        return x;
+    }
+
+    @Override
+    public boolean hasNext() {
+        if (index &#x3C; suwon.listStr.size()) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+}
+</code></pre>
+<p>Suwon / Seoul / Busan 이 각자 다른 자료구조를 가지고 있다라고 할때,</p>
+<p>데이터를 받는 고객은 항상 동일한 메소드를 호출해 데이터를 뽑을 수 있다.</p>
+<pre><code>예제
+Suwon = ArrayList&#x3C;String>
+Seoul = HashMap&#x3C;Integer, String>
+Busan = String[]
+</code></pre>
 </div></article></section><footer>© 2017 <a>flybook</a>. All rights reserved.</footer></div></div>
       </body>
     </html>
