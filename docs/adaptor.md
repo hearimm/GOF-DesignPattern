@@ -82,8 +82,7 @@ public class PrintAdapter extends Banner implements Print{
 	}
 }
 ```
-### PrintAdapter 위임Style (Adapter)
-어댑터 역할클래스 
+### 위임Style
 ```java
 public abstract class Print{ // interface -> abstract class
     public abstract void printWeak();
@@ -108,13 +107,18 @@ public class PrintAdapter extends Print{
 ## Adapter 패턴의 등장인물
 
 
-**Target(대상)** 의 역할 지금 필요한 메소드를 결정합니다. 예제에서는 **(1)Print 인터페이스**나, **(2)Print abstract클래스**에 해당됩니다
+**Target(대상)** 의 역할 지금 필요한 메소드를 결정합니다.
+
+예제에서는 **(1)Print 인터페이스**나, **(2)Print abstract클래스**에 해당됩니다
 
 
-**Client(의뢰자)** 의 역할 Target역할의 메소드를 사용해서 일을 처리합니다. 예제에서는 **Main 클래스** 가 해당됩니다.
+**Client(의뢰자)** 의 역할 Target역할의 메소드를 사용해서 일을 처리합니다. 
 
+예제에서는 **Main 클래스** 가 해당됩니다.
 
-**Adaptee(개조되는 쪽)** 의 역할 이미 준비되어 있는 메소드를 가지고 있는 역할입니다. 예제에서는 **Banner 클래스**에 해당합니다. Target과 Adaptee의 역할이 일치할경우에는 Adapter가 필요 없습니다.
+**Adaptee(개조되는 쪽)** 의 역할 이미 준비되어 있는 메소드를 가지고 있는 역할입니다. 
+
+예제에서는 **Banner 클래스**에 해당합니다. Target과 Adaptee의 역할이 일치할경우에는 Adapter가 필요 없습니다.
 
 ## 왜 쓸까?
 
@@ -138,12 +142,128 @@ p.printStrong();
 ```
 물론 돌아간다.
 
-하지만 아래 예제를 보자
-```java
-MapApi map = new DaumMap("수원");
-MapApi map = new DaumMap("수원");
-MapApi map = new DaumMap("수원");
+Print Interface에선언된 내용만 사용할 수 있기때문에, 좀더 정확한 명세가 가능하다.
 
-map.setMakerColor("RED");
-map.draw();
+## 나만의 Adaptor Example
+
+### Ver1.0 
+다음Map API를 사용하고 있다고 가정
+
+
+### DaumMap.java
+```java
+public class DaumMap {
+  String mapName = "다음맵";
+
+  public String drawMap() {
+    return mapName;
+  }
+  public String moveToSuwon() {
+    return "수원";
+  }
+  public String moveToSeoul() {
+    return "서울";
+  }
+}
+```
+
+### Client.java 사용자
+```java
+public class Client {
+  public static void main(String[] args) {
+    MapApi map = new DaumMap();
+    map.drawMap();
+    map.moveToSuwon();
+    map.moveToSeoul()
+   }
+```
+
+### Ver 2.0
+새로운 기능 추가로 Google API도 추가로 사용하기로 결정했다고 가정
+
+Adaptor = interface
+
+Adaptee = GoogleMap
+
+### MapApi (Adaptor)
+```java
+public interface MapApi {
+  //GoogleMap 에서 어댑터패턴이 적용될 메소드
+  String drawMap();
+  String moveToSuwon();
+  String moveToSeoul();
+}
+```
+
+### GoogleMap.java (Adaptee)
+```java
+public class GoogleMap implements MapApi{
+  String ver = "GoogleMap 1.0";
+  String location = "CA";
+
+  public String version() {
+    return ver;
+  }
+  public String thisLocation() {
+    return location;
+  }
+  public void moveTo(double lat, double lng) {
+    //이동했다.
+  }
+  public String darkTheme() {
+    return "DarkTheme-Apply";
+  }
+  @Override
+  public String drawMap() {
+    return this.version();
+  }
+  @Override
+  public String moveToSuwon() {
+    moveTo( 37.263363,127.028625 );
+    return "수원 (37.263363,127.028625)";
+  }
+  @Override
+  public String moveToSeoul() {
+    moveTo( 37.564374,126.975586 );
+    return "서울 ( 37.564374,126.975586 )";
+  }
+}
+```
+
+
+
+### DaumMap.java
+```java
+public class DaumMap implements MapApi {
+  String mapName = "다음맵";
+
+  public String drawMap() {
+    return mapName;
+  }
+  public String moveToSuwon() {
+    return "수원";
+  }
+  public String moveToSeoul() {
+    return "서울";
+  }
+}
+```
+
+### Client.java 사용자 Ver2.0
+```java
+public class Client {
+  public static void main(String[] args) {
+    MapApi map = new DaumMap();
+    map.drawMap();
+    map.moveToSuwon();
+    map.moveToSeoul();
+
+    MapApi googleMap = new GoogleMap();
+    map.drawMap();
+    map.moveToSuwon();
+    map.moveToSeoul();
+    //map.darkTheme(); // error:The method darkTheme() is undefined for the type MapApi
+
+    ((GoogleMap) googleMap).darkTheme(); // OK! MapApi에 없는 기능을 쓰려면 다운캐스팅
+}
 ```
