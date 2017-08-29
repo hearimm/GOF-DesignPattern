@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/8.4.0/bin/node /usr/local/Cellar/yarn/0.27.5_1/libexec/bin/yarn.js global add serve -d
+  /usr/local/Cellar/node/8.4.0/bin/node /usr/local/Cellar/yarn/0.27.5_1/libexec/bin/yarn.js run
 
 PATH: 
   /Users/Hyuk/Documents/google-cloud-sdk/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin

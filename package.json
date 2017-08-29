@@ -10,5 +10,5 @@
   "devDependencies": {
     "flybook": "^1.4.5",
     "gh-pages": "^1.0.0"
-  },
+  }
 }
