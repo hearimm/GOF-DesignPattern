@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<title>Builder</title>
+<meta name="description" content="Builder Pattern
+
+왜쓸까
+
+빌딩을 세울 때 우선 지반을 다지고, 골격을 세우고, 아래에서 위로 조금씩 만들어 간다.
+
+일반적으로 복잡한 건축물을 세울 때 한 번에 완성" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link href="//fonts.googleapis.com/css?family=Rubik|Unica+One" rel="stylesheet" />
+<link rel="stylesheet" href=".\static/css/normalize.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/light.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+<style>
+    body,
+    .markdown-body {
+        font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src=".\static/main.js?cfef39a759eb9a87"></script>
+
+<body>
+    <div id="root">
+        <div class="wrap container-fluid">
+            <header class="site-header">
+                <h1>
+                    <a href="/GOF-DesignPattern/">flybook</a>
+                </h1>
+                <nav class="nav-link">
+                    <a href="/GOF-DesignPattern/">Home</a>
+                    <a href="https://hearimm.github.io/GOF-DesignPattern/">Git</a>
+                    <a href="#" class="more">
+                        <svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18">
+                            <path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </header>
+            <section class="row main">
+                <aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="chap">
+                        <span class="chap-title"></span>
+                        <ul>
+                            <li class="">
+                                <a href="adaptor.html">Adaptor</a>
+                            </li>
+                            <li class="">
+                                <a href="iterator.html">Iterator</a>
+                            </li>
+                            <li class="">
+                                <a href="template.html">Template</a>
+                            </li>
+                            <li class="">
+                                <a href="abstractFactory.html">Abstractfactory</a>
+                            </li>
+                            <li class="">
+                                <a href="bridge.html">Bridge</a>
+                            </li>
+                            <li class="active">
+                                <a href="builder.html">Builder</a>
+                            </li>
+                            <li class="">
+                                <a href="chainOfResponsibility.html">Chainofresponsibility</a>
+                            </li>
+                            <li class="">
+                                <a href="Command.html">Command</a>
+                            </li>
+                            <li class="">
+                                <a href="effectiveJavaBuild.html">Effectivejavabuild</a>
+                            </li>
+                            <li class="">
+                                <a href="facade.html">Facade</a>
+                            </li>
+                            <li class="">
+                                <a href="factoryMethod.html">Factorymethod</a>
+                            </li>
+                            <li class="">
+                                <a href="flyWeight.html">Flyweight</a>
+                            </li>
+                            <li class="">
+                                <a href="Interpreter.html">Interpreter</a>
+                            </li>
+                            <li class="">
+                                <a href="mediator.html">Mediator</a>
+                            </li>
+                            <li class="">
+                                <a href="memento.html">Memento</a>
+                            </li>
+                            <li class="">
+                                <a href="observer.html">Observer</a>
+                            </li>
+                            <li class="">
+                                <a href="prototype.html">Prototype</a>
+                            </li>
+                            <li class="">
+                                <a href="proxy.html">Proxy</a>
+                            </li>
+                            <li class="">
+                                <a href="singleton.html">Singleton</a>
+                            </li>
+                            <li class="">
+                                <a href="state.html">State</a>
+                            </li>
+                            <li class="">
+                                <a href="visitor.html">Visitor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <article class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <div class="markdown-body">
+                        <h1 id="builder-pattern">
+                            <a href="#builder-pattern" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Builder Pattern</h1>
+                        <h2 id="왜쓸까">
+                            <a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>왜쓸까</h2>
+                        <p>빌딩을 세울 때 우선 지반을 다지고, 골격을 세우고, 아래에서 위로 조금씩 만들어 간다.</p>
+                        <p>일반적으로 복잡한 건축물을 세울 때 한 번에 완성시키기는 어렵다.</p>
+                        <p>우선 전체를 구성하고 있는 각 부분을 들고 단계를 밟아 만들어 나간다.</p>
+                        <p>이와 같이 구조를 가진 인스턴스를 쌓아 올리는 것이 Builder 패턴이다.</p>
+                        <h2 id="사고-넓히기">
+                            <a href="#%EC%82%AC%EA%B3%A0-%EB%84%93%ED%9E%88%EA%B8%B0" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>사고 넓히기</h2>
+                        <h2 id="누가-무엇을-알고-있을까">
+                            <a href="#%EB%88%84%EA%B0%80-%EB%AC%B4%EC%97%87%EC%9D%84-%EC%95%8C%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>누가 무엇을 알고 있을까?</h2>
+                        <p>OOP(객체지향 프로그램)에서는 '누가 무엇을 알고 있을까?'라는 화두는 상당히 중요하다. </p>
+                        <p>즉, 어떤 클래스가 어떤 메소드를 사용할 수 있을까?에 주의하며 프로그래밍을 할 필요가 있다. </p>
+                        <p>예제를 상기해보자. Main 클래스는 Builder 클래스의 메소드를 모른다. </p>
+                        <p>Main 클래스는 Director 클래스의 construct 메소드만을 호출한다. </p>
+                        <p>그러면 Direcotr 클래스 안에서 조용히 일이 진행되고 문서가 완성된다. </p>
+                        <p>한편 Director클래스가 알고 있는것은 Builder클래스이다. </p>
+                        <p>Director 클래스는 Builder 클래스의 메소드를 사용해서 문서를 구축한다. </p>
+                        <p>그러나 Director 클래스는 자신이 실제로 이용하고 있는 클래스가 사실 모른다. </p>
+                        <p>HawaiianPizzaBuilder인지, SpicyPizzaBuilder인지 또는 Builder의 하위 클래스인지 모른다.</p>
+                        <p>Director클래스는 Builder 클래스의 메소드만을 사용하고 있고 Builder 클래스의 하위 클래스는 그 메소드를 구현하기 때문이다.</p>
+                        <p>Director 클래스가 자신이 이용하고 있는 Builder클래스의 하위 클래스를 모르는 것은 정말 잘 된 일입니다.</p>
+                        <p>왜냐하면 모르기 때문에 교체할 수 있기 때문이다.</p>
+                        <p>TextBuilder의 인스턴스를 Director에 제공하거나 Director의 HTMLBuilder의 인스턴스를 Director에 제공해도 제대로 기능하는 것은 Director
+                            클래스가 Builder클래스의 구체적인 하위 클래스를 모르기 때문이다.</p>
+                        <p>모르기 때문에 교환이 가능하고, 교체가 가능하기 때문에 부품으로서 가치가 높다.</p>
+                        <p>이 '교환가능성'에 대해서 클래스의 설계자는 항상 기억할 필요가 있다.</p>
+                        <p>출처 :
+                            <a href="http://jellyms.kr/227">http://jellyms.kr/227</a>
+                        </p>
+                        <h2 id="코드로-보기">
+                            <a href="#%EC%BD%94%EB%93%9C%EB%A1%9C-%EB%B3%B4%EA%B8%B0" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>코드로 보기</h2>
+                        <pre><code class="language-java">/* "Product" */
+// 1) 만들 클래스에 대해 정의 한다.
+class Pizza {
+    private String dough = "";
+    private String sauce = "";
+    private String topping = "";
+
+    public void setDough(String dough) {
+        this.dough = dough;
+    }
+
+    public void setSauce(String sauce) {
+        this.sauce = sauce;
+    }
+
+    public void setTopping(String topping) {
+        this.topping = topping;
+    }
+}
+
+/* "Abstract Builder" */
+// 2) 어떻게 만들지 빌더 클래스로 정의해본다.
+abstract class PizzaBuilder {
+    protected Pizza pizza;
+
+    public Pizza getPizza() {
+        return pizza;
+    }
+
+    public void createNewPizzaProduct() {
+        pizza = new Pizza();
+    }
+
+    public abstract void buildDough();
+    public abstract void buildSauce();
+    public abstract void buildTopping();
+}
+
+/* "ConcreteBuilder" */
+// 3) 빌더 클래스르르 구현해본다.
+class HawaiianPizzaBuilder extends PizzaBuilder {
+    public void buildDough() {
+        pizza.setDough("cross");
+    }
+
+    public void buildSauce() {
+        pizza.setSauce("mild");
+    }
+
+    public void buildTopping() {
+        pizza.setTopping("ham+pineapple");
+    }
+}
+
+/* "ConcreteBuilder" */
+// 3-2) 빌더 구현 클래스 #2
+class SpicyPizzaBuilder extends PizzaBuilder {
+    public void buildDough() {
+        pizza.setDough("pan baked");
+    }
+
+    public void buildSauce() {
+        pizza.setSauce("hot");
+    }
+
+    public void buildTopping() {
+        pizza.setTopping("pepperoni+salami");
+    }
+}
+
+/* "Director" */
+// 중요! 디렉터를 추가해, 빌더 클래스를 수행하는 부분을 만든다.
+// template pattern 이라면, PizzaBuilder에 constructPizza()를 넣었을텐데
+// 디렉터를 추가해서 디렉터가 수행하도록 했다.
+class Waiter {
+    private PizzaBuilder pizzaBuilder;
+
+    public void setPizzaBuilder(PizzaBuilder pb) {
+        pizzaBuilder = pb;
+    }
+
+    public Pizza getPizza() {
+        return pizzaBuilder.getPizza();
+    }
+
+    public void constructPizza() {
+        pizzaBuilder.createNewPizzaProduct();
+        pizzaBuilder.buildDough();
+        pizzaBuilder.buildSauce();
+        pizzaBuilder.buildTopping();
+    }
+}
+
+/* A customer ordering a pizza. */
+//사용자는 디렉터의 메소드 / 빌더 구현클래스들을 사용하지만,
+//어떻게 빌드되는지 알수가 없다.(피자의 제조과정을 손님이 알 필요 없는것)
+public class PizzaBuilderDemo {
+    public static void main(String[] args) {
+        Waiter waiter = new Waiter();
+        PizzaBuilder hawaiianPizzabuilder = new HawaiianPizzaBuilder();
+        PizzaBuilder spicyPizzaBuilder = new SpicyPizzaBuilder();
+
+        waiter.setPizzaBuilder( hawaiianPizzabuilder );
+        waiter.constructPizza();
+
+        Pizza pizza = waiter.getPizza();
+    }
+}
+</code></pre>
+                    </div>
+                </article>
+            </section>
+            <footer>© 2017
+                <a>flybook</a>. All rights reserved.</footer>
+        </div>
+    </div>
+</body>
+
+</html>

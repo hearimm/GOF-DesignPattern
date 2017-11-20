@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<title>Flyweight</title>
+<meta name="description" content="Flyweight 패턴
+
+UML
+
+왜쓸까
+
+플라이웨잇 복싱에서 가벼운 체급.
+
+(미니멈급), 플라이급, 밴텀급, 페더급, 라이트급, 미들급, 헤비급
+
+암튼 가볍다.
+
+이 디자인패턴" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link href="//fonts.googleapis.com/css?family=Rubik|Unica+One" rel="stylesheet" />
+<link rel="stylesheet" href=".\static/css/normalize.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/light.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+<style>
+    body,
+    .markdown-body {
+        font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src=".\static/main.js?cfef39a759eb9a87"></script>
+
+<body>
+    <div id="root">
+        <div class="wrap container-fluid">
+            <header class="site-header">
+                <h1>
+                    <a href="/GOF-DesignPattern/">flybook</a>
+                </h1>
+                <nav class="nav-link">
+                    <a href="/GOF-DesignPattern/">Home</a>
+                    <a href="https://hearimm.github.io/GOF-DesignPattern/">Git</a>
+                    <a href="#" class="more">
+                        <svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18">
+                            <path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </header>
+            <section class="row main">
+                <aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="chap">
+                        <span class="chap-title"></span>
+                        <ul>
+                            <li class="">
+                                <a href="adaptor.html">Adaptor</a>
+                            </li>
+                            <li class="">
+                                <a href="iterator.html">Iterator</a>
+                            </li>
+                            <li class="">
+                                <a href="template.html">Template</a>
+                            </li>
+                            <li class="">
+                                <a href="abstractFactory.html">Abstractfactory</a>
+                            </li>
+                            <li class="">
+                                <a href="bridge.html">Bridge</a>
+                            </li>
+                            <li class="">
+                                <a href="builder.html">Builder</a>
+                            </li>
+                            <li class="">
+                                <a href="chainOfResponsibility.html">Chainofresponsibility</a>
+                            </li>
+                            <li class="">
+                                <a href="Command.html">Command</a>
+                            </li>
+                            <li class="">
+                                <a href="effectiveJavaBuild.html">Effectivejavabuild</a>
+                            </li>
+                            <li class="">
+                                <a href="facade.html">Facade</a>
+                            </li>
+                            <li class="">
+                                <a href="factoryMethod.html">Factorymethod</a>
+                            </li>
+                            <li class="active">
+                                <a href="flyWeight.html">Flyweight</a>
+                            </li>
+                            <li class="">
+                                <a href="Interpreter.html">Interpreter</a>
+                            </li>
+                            <li class="">
+                                <a href="mediator.html">Mediator</a>
+                            </li>
+                            <li class="">
+                                <a href="memento.html">Memento</a>
+                            </li>
+                            <li class="">
+                                <a href="observer.html">Observer</a>
+                            </li>
+                            <li class="">
+                                <a href="prototype.html">Prototype</a>
+                            </li>
+                            <li class="">
+                                <a href="proxy.html">Proxy</a>
+                            </li>
+                            <li class="">
+                                <a href="singleton.html">Singleton</a>
+                            </li>
+                            <li class="">
+                                <a href="state.html">State</a>
+                            </li>
+                            <li class="">
+                                <a href="visitor.html">Visitor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <article class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <div class="markdown-body">
+                        <h1 id="flyweight-패턴">
+                            <a href="#flyweight-%ED%8C%A8%ED%84%B4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Flyweight 패턴</h1>
+                        <p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/W3sDesign_Flyweight_Design_Pattern_UML.jpg" alt="UML">
+                        </p>
+                        <h2 id="왜쓸까">
+                            <a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>왜쓸까</h2>
+                        <p>플라이웨잇 복싱에서 가벼운 체급.</p>
+                        <p>(미니멈급), 플라이급, 밴텀급, 페더급, 라이트급, 미들급, 헤비급</p>
+                        <p>암튼 가볍다.</p>
+                        <p>이 디자인패턴은 오브젝트를 가볍게 하기 위한것 입니다. 여기서 가볍다는, 메모리 사용량을 의미합니다.</p>
+                        <p>Java에서는 new를 많이하면, 메모리의 사용량이 커집니다.</p>
+                        <p>Flyweight 패턴을 한마디로 말하면,
+                            <code>인스턴스를 가능한 대로 공유시켜서 쓸데 없이 new하지 않도록 한다</code>
+                        </p>
+                        <p>인스턴스가 필요할때 항상 new 하는것이 아니라 이미 만들어져 있는 인스턴스를 사용해도 될때, 재사용해서, 아껴쓰고 나눠쓰고..받아쓰고 다시쓰...</p>
+                        <h2 id="예제">
+                            <a href="#%EC%98%88%EC%A0%9C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>예제</h2>
+                        <p>예제에선 각 숫자를 표시하는 txt파일이 있습니다.</p>
+                        <h3 id="big0text">
+                            <a href="#big0text" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>big0.text</h3>
+                        <pre><code class="language-txt">....######......
+..##......##....
+..##......##....
+..##......##....
+..##......##....
+..##......##....
+....######......
+................
+</code></pre>
+                        <h3 id="big1txt">
+                            <a href="#big1txt" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>big1.txt</h3>
+                        <pre><code class="language-txt">......##........
+..######........
+......##........
+......##........
+......##........
+......##........
+..##########....
+................
+</code></pre>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>역할</th>
+                                    <th>이름</th>
+                                    <th>해설</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FlyWeight</td>
+                                    <td>BigChar</td>
+                                    <td>big0.txt를 나타내는 클래스</td>
+                                </tr>
+                                <tr>
+                                    <td>FlyweightFactory</td>
+                                    <td>BigCharFactory</td>
+                                    <td>BigChar의 인스턴스를 공유하면서 생성하는 클래스</td>
+                                </tr>
+                                <tr>
+                                    <td>Client</td>
+                                    <td>BigString</td>
+                                    <td>BigChar를 모아서 만든 큰 문자열을 나타내는 클래스</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>Main</td>
+                                    <td>동작 테스트용 클래스</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 id="bigcharjava">
+                            <a href="#bigcharjava" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>BigChar.java</h3>
+                        <pre><code class="language-java">    import java.io.BufferedReader;
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.io.InputStreamReader;
+
+    public class BigChar {
+        private char charname; // 인스턴스 이름 0,1,2...
+        private String fontdata; // 파일 읽은 데이터
+
+        public BigChar(char charname) {
+            this.charname = charname;
+            String filePath = "big" + charname + ".txt";
+            InputStream is = this.getClass().getResourceAsStream(filePath);
+            try {
+                BufferedReader reader =
+                    new BufferedReader(new InputStreamReader(is));
+
+                String line;
+
+                StringBuffer buf = new StringBuffer();
+                while ((line = reader.readLine()) != null) {
+                    buf.append(line);
+                    buf.append("\n");
+                }
+                reader.close();
+                this.fontdata = buf.toString();
+            } catch (IOException e) {
+                this.fontdata = charname + "?" + filePath;
+            }
+        }
+
+        public void print() {
+            System.out.println(fontdata);
+        }
+    }
+</code></pre>
+                        <h3 id="bigcharfactory">
+                            <a href="#bigcharfactory" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>BigCharFactory</h3>
+                        <pre><code class="language-java">import java.util.HashMap;
+
+    public class BigCharFactory {
+        private HashMap&#x3C;String, BigChar> pool = new HashMap&#x3C;String, BigChar>(); // BigChar인스턴스 관리
+
+        // 싱글톤 생성
+        private static BigCharFactory singleton = new BigCharFactory();
+
+        private BigCharFactory() {
+        }
+
+        public static BigCharFactory getInstance() {
+            return singleton;
+        }
+
+        /**
+         * BigChar 인스턴스 생성 공유
+         * 
+         * @param charname
+         * @return
+         */
+        public synchronized BigChar getBigChar(char charname) { // synchronized 이유? 스레드 여러개 일때 방어 코드
+            BigChar bc = pool.get("" + charname); // 해쉬맵에서 꺼내옴
+            if (bc == null) {
+                bc = new BigChar(charname); // null이면 새로 만들어버림 :)
+                pool.put("" + charname, bc); // 해쉬맵에 새로 담기
+            }
+            return bc;
+        }
+    }
+</code></pre>
+                        <h3 id="bigstring">
+                            <a href="#bigstring" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>BigString</h3>
+                        <pre><code class="language-java">    public class BigString {
+        private BigChar[] bigchars; // BigChar 배열
+        // 생성자
+
+        public BigString(String string) { // String으로 들어온걸 1개씩 쪼개서, file을 읽는다
+            bigchars = new BigChar[string.length()];
+            BigCharFactory factory = BigCharFactory.getInstance(); // Factory도 싱글턴
+            for (int i = 0; i &#x3C; bigchars.length; i++) {
+                bigchars[i] = factory.getBigChar(string.charAt(i)); // Factory에서 하나 꺼냄
+            }
+        }
+
+        // 표시
+        public void print() {
+            for (int i = 0; i &#x3C; bigchars.length; i++) {
+                bigchars[i].print();
+            }
+        }
+    }
+</code></pre>
+                        <h3 id="main">
+                            <a href="#main" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Main</h3>
+                        <pre><code class="language-java">    public class Main {
+
+        public static void main(String[] args) {
+            BigString bs = new BigString("111-222-333");
+            bs.print();
+        }
+    }
+</code></pre>
+                        <h2 id="사고를-넓히기-위한-포인트">
+                            <a href="#%EC%82%AC%EA%B3%A0%EB%A5%BC-%EB%84%93%ED%9E%88%EA%B8%B0-%EC%9C%84%ED%95%9C-%ED%8F%AC%EC%9D%B8%ED%8A%B8" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>사고를 넓히기 위한 포인트</h2>
+                        <h3 id="여러-장소에-영향을-미친다">
+                            <a href="#%EC%97%AC%EB%9F%AC-%EC%9E%A5%EC%86%8C%EC%97%90-%EC%98%81%ED%96%A5%EC%9D%84-%EB%AF%B8%EC%B9%9C%EB%8B%A4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>여러 장소에 영향을 미친다</h3>
+                        <p>Flyweight 패턴에서는 인스턴스를 공유하는 것이 테마입니다.</p>
+                        <p>인스턴스를 공유할때 주의해야 하는점은
+                            <code>여러 장소에 영향을 미친다</code>는 점 입니다.</p>
+                        <p>즉 하나의 인스턴스를 변경하면 그 인스턴스를 사용하고 있는 여러 장소에 동시에 영향을 미칩니다.</p>
+                        <p>따라서, 제공해야 할 정보는 신중히 생각해야 합니다.</p>
+                        <p>예를들어 예제에 색을 추가한다고 하면, 어느 클래스에 두어야 할까요?</p>
+                        <p>BigChar 에 두면, 동일한 글자에 동일한 색 1개만 적용가능합니다.</p>
+                        <p>BigString 에 두면, 3번째 문자는 빨강 처럼 관리할 수 있습니다.</p>
+                        <p>이 두가지는 누가 옳고 그름이 아니라, 목적에 주의해서 정의하면 됩니다.</p>
+                        <h3 id="intrinsic-와-extrinsic">
+                            <a href="#intrinsic-%EC%99%80-extrinsic" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>intrinsic 와 extrinsic</h3>
+                        <p>공유시키는 정보 intrinsic</p>
+                        <p>공유시키지 않는 정보 extrinsic</p>
+                        <p>intrinsic은 인스턴스를 어디에 가지고 있더라도 어떠한 상황에서도 변하지 않는정보.</p>
+                        <p>상태에 의존하지 않는 정보입니다.</p>
+                        <p>BigChar에 필드 데이터는 BigString 어디에 등장해도 변하지 않습니다.</p>
+                        <p>BigChar의 fontdata는 intrinsic한 정보가 됩니다.</p>
+                        <p>extrinsic은 인스턴스를 두는 장소에 따라서 변화하는 정보. 상황에따라 변화하는 정보.</p>
+                        <p>상태에 의존하는 정보 입니다.</p>
+                        <p>예를 들어 BigChar의 인스턴스가 BigString의 몇번째 문자인가 하는 정보는</p>
+                        <p>BigChar가 놓이는 장소에 따라 변하기 때문에 BigChar에게 제공할 수는 없습니다.</p>
+                        <p>이 정보는 extrinsic한 정보가 됩니다.</p>
+                        <p>앞에 설명한 '색'의 정보를 BigChar에게 제공할 것인가 아닌가라는 이야기는,</p>
+                        <p>색을 intrinsic한 정보로 취급할것인가, extrinsic한 정보로 취급할 것인가로 바꿔 말할 수 있습니다.</p>
+                        <h3 id="인스턴스와-gcgarbage-collection">
+                            <a href="#%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%EC%99%80-gcgarbage-collection" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>인스턴스와 GC(garbage collection)</h3>
+                        <p>BigCharFactory에서 HashMap을 사용해서 생성한 인스턴스를 관리하고 있습니다.</p>
+                        <p>이와 같이 인스턴스를 관리하는 기능을 Java에서 실현할때는 </p>
+                        <p>반드시
+                            <code>관리되고 있는 인스턴스는 garbage collection되지 않는다</code> 라는 점을 주의해야 합니다.</p>
+                    </div>
+                </article>
+            </section>
+            <footer>© 2017
+                <a>flybook</a>. All rights reserved.</footer>
+        </div>
+    </div>
+</body>
+
+</html>

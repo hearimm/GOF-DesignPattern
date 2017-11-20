@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<title>Observer</title>
+<meta name="description" content="Observer 패턴
+
+Observer 패턴
+
+예제소스
+
+왜쓸까
+
+옵저버 패턴은 두가지 오브젝트가 필요합니다.
+
+관찰대상 Object(Subject)
+
+관찰자 Object(Obse" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link href="//fonts.googleapis.com/css?family=Rubik|Unica+One" rel="stylesheet" />
+<link rel="stylesheet" href=".\static/css/normalize.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/light.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+<style>
+    body,
+    .markdown-body {
+        font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src=".\static/main.js?cfef39a759eb9a87"></script>
+
+<body>
+    <div id="root">
+        <div class="wrap container-fluid">
+            <header class="site-header">
+                <h1>
+                    <a href="/GOF-DesignPattern/">flybook</a>
+                </h1>
+                <nav class="nav-link">
+                    <a href="/GOF-DesignPattern/">Home</a>
+                    <a href="https://hearimm.github.io/GOF-DesignPattern/">Git</a>
+                    <a href="#" class="more">
+                        <svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18">
+                            <path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </header>
+            <section class="row main">
+                <aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="chap">
+                        <span class="chap-title"></span>
+                        <ul>
+                            <li class="">
+                                <a href="adaptor.html">Adaptor</a>
+                            </li>
+                            <li class="">
+                                <a href="iterator.html">Iterator</a>
+                            </li>
+                            <li class="">
+                                <a href="template.html">Template</a>
+                            </li>
+                            <li class="">
+                                <a href="abstractFactory.html">Abstractfactory</a>
+                            </li>
+                            <li class="">
+                                <a href="bridge.html">Bridge</a>
+                            </li>
+                            <li class="">
+                                <a href="builder.html">Builder</a>
+                            </li>
+                            <li class="">
+                                <a href="chainOfResponsibility.html">Chainofresponsibility</a>
+                            </li>
+                            <li class="">
+                                <a href="Command.html">Command</a>
+                            </li>
+                            <li class="">
+                                <a href="effectiveJavaBuild.html">Effectivejavabuild</a>
+                            </li>
+                            <li class="">
+                                <a href="facade.html">Facade</a>
+                            </li>
+                            <li class="">
+                                <a href="factoryMethod.html">Factorymethod</a>
+                            </li>
+                            <li class="">
+                                <a href="flyWeight.html">Flyweight</a>
+                            </li>
+                            <li class="">
+                                <a href="Interpreter.html">Interpreter</a>
+                            </li>
+                            <li class="">
+                                <a href="mediator.html">Mediator</a>
+                            </li>
+                            <li class="">
+                                <a href="memento.html">Memento</a>
+                            </li>
+                            <li class="active">
+                                <a href="observer.html">Observer</a>
+                            </li>
+                            <li class="">
+                                <a href="prototype.html">Prototype</a>
+                            </li>
+                            <li class="">
+                                <a href="proxy.html">Proxy</a>
+                            </li>
+                            <li class="">
+                                <a href="singleton.html">Singleton</a>
+                            </li>
+                            <li class="">
+                                <a href="state.html">State</a>
+                            </li>
+                            <li class="">
+                                <a href="visitor.html">Visitor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <article class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <div class="markdown-body">
+                        <h1 id="observer-패턴">
+                            <a href="#observer-%ED%8C%A8%ED%84%B4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Observer 패턴</h1>
+                        <ul>
+                            <li>
+                                <p>
+                                    <a href="#observer-%ED%8C%A8%ED%84%B4">Observer 패턴</a>
+                                </p>
+                                <ul>
+                                    <li>
+                                        <a href="#%EC%98%88%EC%A0%9C%EC%86%8C%EC%8A%A4">예제소스</a>
+                                    </li>
+                                    <li>
+                                        <a href="#%EC%99%9C%EC%93%B8%EA%B9%8C">왜쓸까</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>옵저버 패턴은 두가지 오브젝트가 필요합니다.</p>
+                        <ol>
+                            <li>
+                                <p>관찰대상 Object(Subject)</p>
+                            </li>
+                            <li>
+                                <p>관찰자 Object(Observer)</p>
+                            </li>
+                        </ol>
+                        <p>Subject는, 누가 관찰하고 있는지를 저장하고 있고, 그 대상들에게 자신이 변경 됬다라는걸 알립니다.(notify)</p>
+                        <p>Observer는
+                            <code>notify</code>를 받았을때, 각자 어떻게 수행할지 가지고 있다가 수행하게 됩니다.</p>
+                        <p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Observer.svg/500px-Observer.svg.png" alt="클래스다이어그램">
+                        </p>
+                        <h2 id="예제소스">
+                            <a href="#%EC%98%88%EC%A0%9C%EC%86%8C%EC%8A%A4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>예제소스</h2>
+                        <pre><code class="language-python">"""옵저버 패턴 모듈"""
+    import random
+
+
+    class Subject:
+        """Subject 클래스"""
+
+        def __init__(self):
+            self.__observer_collection = []  # private variable
+
+        def register_observer(self, observer):
+            """옵저버를 Subject의 observer_collection에 저장"""
+            self.__observer_collection.append(observer)
+
+        def notify_observers(self, num):
+            """observer_collection에서 observer를 꺼내서 notify"""
+            for observer in self.__observer_collection:
+                observer.notify(num)
+
+
+    class RandomNumberSubject(Subject):
+        """Subject 구현 클래스"""
+
+        def random_number_create(self):
+            """랜덤 숫자를 넣어서 알림"""
+            rand_num = random.randrange(1, 7)
+            self.notify_observers(rand_num)
+
+
+    class OddNumberSubject(Subject):
+        """Subject 구현 클래스"""
+
+        def odd_number_create(self):
+            """홀수 숫자 알림"""
+            for num in range(1, 5):
+                if num % 2 != 0:
+                    self.notify_observers(num)
+
+
+    class Observer:
+        """옵저버 클래스"""
+
+        def __init__(self, subject):
+            subject.register_observer(self)
+
+        def notify(self, num):
+            """
+            abstract method
+            각자 notify 받을때 실행할 method
+            """
+            raise NotImplementedError
+
+
+    class DecimalObserver(Observer):
+        """10진수 옵저버"""
+
+        def notify(self, num):
+            print("Decimal value = %s" % num)
+
+
+    class HexObserver(Observer):  # 상속(Observer)
+        """16진수 옵저버"""
+
+        def notify(self, num):
+            print("Hex value = %s" % hex(num))
+
+
+    class BinaryObserver(Observer):
+        """2진수 옵저버"""
+
+        def notify(self, num):
+            print("Binary value = %s" % bin(num))
+
+
+    subject1 = RandomNumberSubject()
+    observer1 = DecimalObserver(subject1)
+    observer2 = HexObserver(subject1)
+    observer3 = BinaryObserver(subject1)
+
+    subject2 = OddNumberSubject()
+    observer4 = DecimalObserver(subject2)
+
+    subject1.random_number_create()
+    subject2.odd_number_create()
+
+    """
+    실행결과
+    Decimal value = 6
+    Hex value = 0x6
+    Binary value = 0b110
+
+    Decimal value = 1
+    Decimal value = 3
+    """
+</code></pre>
+                        <h2 id="왜쓸까">
+                            <a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>왜쓸까</h2>
+                        <p>디자인패턴의 목적 중 하나는, 클래스를 재이용 가능한 부품으로 만드는 일입니다.</p>
+                        <p>Concrete Subject는 누가 관찰하는지 까지는 관심 없습니다. observer_collection에 있는 observer들이 notify 메소드를 가지고 있다는 것만
+                            알고 있으면, 됩니다.</p>
+                        <p>Concrete Observer도 어떤 Subject를 관찰하고 있는지는 알 수 없습니다. Subject의 하위 클래스라는것만 알고, notify에 int 값만 들어오면 됩니다.</p>
+                        <p>다른 패턴들과 마찬가지로, 1. 추상클래스나 인터페이스를 사용해서 구상 클래스로부터 추상 메소드를 분리한다. 1. 인수로 인스턴스를 전달할 때, 필드에서 인스턴스를 저장할 때에는
+                            구상클래스의 형태로 하지 않고, 추상클래스나 인터페이스의 형태로 둔다</p>
+                        <p>위와 같이 해두면, 구상 클래스의 부분을 쉽게 교환 가능합니다.</p>
+                        <p>주의사항</p>
+                        <p>무한루프에 빠질 우려를 주의 해야합니다.(flag를 두는것도 방법)</p>
+                        <p>ex) Subject 상태변화 -> Observer에게 전달 -> Observer가 Subject의 메소드를 호출 -> 이로인해 Subject 상태 변화 -> Observer에게
+                            전달 .... 무한루프</p>
+                        <p>옵저버 패턴은 관찰하기보다, 전달받기를 기다립니다.</p>
+                        <p>능동적으로 Observer가 관찰하는 것이 아니고, Subject 역할로 부터 전달되기를 수동적으로 기다립니다.</p>
+                        <p>그래서 옵저버 패턴을 Publish - Subscribe 패턴이라고도 합니다.</p>
+                    </div>
+                </article>
+            </section>
+            <footer>© 2017
+                <a>flybook</a>. All rights reserved.</footer>
+        </div>
+    </div>
+</body>
+
+</html>

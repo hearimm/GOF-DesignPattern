@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<title>Factorymethod</title>
+<meta name="description" content="Factory Method 패턴
+
+이해한 내용
+
+Creator 라는 abstract class 가 템플릿패턴의 템플릿 역할을 한다.
+
+공통함수를 갖고 생성할때, 템플릿 메소드 처럼" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link href="//fonts.googleapis.com/css?family=Rubik|Unica+One" rel="stylesheet" />
+<link rel="stylesheet" href=".\static/css/normalize.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/light.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+<style>
+    body,
+    .markdown-body {
+        font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src=".\static/main.js?cfef39a759eb9a87"></script>
+
+<body>
+    <div id="root">
+        <div class="wrap container-fluid">
+            <header class="site-header">
+                <h1>
+                    <a href="/GOF-DesignPattern/">flybook</a>
+                </h1>
+                <nav class="nav-link">
+                    <a href="/GOF-DesignPattern/">Home</a>
+                    <a href="https://hearimm.github.io/GOF-DesignPattern/">Git</a>
+                    <a href="#" class="more">
+                        <svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18">
+                            <path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </header>
+            <section class="row main">
+                <aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="chap">
+                        <span class="chap-title"></span>
+                        <ul>
+                            <li class="">
+                                <a href="adaptor.html">Adaptor</a>
+                            </li>
+                            <li class="">
+                                <a href="iterator.html">Iterator</a>
+                            </li>
+                            <li class="">
+                                <a href="template.html">Template</a>
+                            </li>
+                            <li class="">
+                                <a href="abstractFactory.html">Abstractfactory</a>
+                            </li>
+                            <li class="">
+                                <a href="bridge.html">Bridge</a>
+                            </li>
+                            <li class="">
+                                <a href="builder.html">Builder</a>
+                            </li>
+                            <li class="">
+                                <a href="chainOfResponsibility.html">Chainofresponsibility</a>
+                            </li>
+                            <li class="">
+                                <a href="Command.html">Command</a>
+                            </li>
+                            <li class="">
+                                <a href="effectiveJavaBuild.html">Effectivejavabuild</a>
+                            </li>
+                            <li class="">
+                                <a href="facade.html">Facade</a>
+                            </li>
+                            <li class="active">
+                                <a href="factoryMethod.html">Factorymethod</a>
+                            </li>
+                            <li class="">
+                                <a href="flyWeight.html">Flyweight</a>
+                            </li>
+                            <li class="">
+                                <a href="Interpreter.html">Interpreter</a>
+                            </li>
+                            <li class="">
+                                <a href="mediator.html">Mediator</a>
+                            </li>
+                            <li class="">
+                                <a href="memento.html">Memento</a>
+                            </li>
+                            <li class="">
+                                <a href="observer.html">Observer</a>
+                            </li>
+                            <li class="">
+                                <a href="prototype.html">Prototype</a>
+                            </li>
+                            <li class="">
+                                <a href="proxy.html">Proxy</a>
+                            </li>
+                            <li class="">
+                                <a href="singleton.html">Singleton</a>
+                            </li>
+                            <li class="">
+                                <a href="state.html">State</a>
+                            </li>
+                            <li class="">
+                                <a href="visitor.html">Visitor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <article class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <div class="markdown-body">
+                        <h1 id="factory-method-패턴">
+                            <a href="#factory-method-%ED%8C%A8%ED%84%B4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Factory Method 패턴</h1>
+                        <h2 id="이해한-내용">
+                            <a href="#%EC%9D%B4%ED%95%B4%ED%95%9C-%EB%82%B4%EC%9A%A9" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>이해한 내용</h2>
+                        <p>
+                            <strong>Creator</strong> 라는 abstract class 가 템플릿패턴의 템플릿 역할을 한다.</p>
+                        <p>공통함수를 갖고 생성할때, 템플릿 메소드 처럼 step을 가지고 있는다.</p>
+                        <p>
+                            <strong>Prodcut</strong>는 생성이 될 객체에 대한 Interface.</p>
+                        <p>
+                            <strong>Concrete Creator</strong>는 각 Step의 메소드 내용을 구현한다.</p>
+                        <p>
+                            <strong>Concrete Product</strong>는 Product의 Interface를 구현한다.</p>
+                        <h2 id="creator">
+                            <a href="#creator" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Creator</h2>
+                        <p>create(String owner) 이 부분이 생성할때 시작하는 공통 메소드</p>
+                        <pre><code class="language-java">package com.hyuky.framework;
+
+// Creator
+public abstract class Factory {
+    // Product make and some other function Like Template pattern!!
+    public final Product create(String owner) {
+        Product product = createProduct(owner); // step1
+        registerProduct(product); // step2
+        return product;
+    }
+    // Product create do only! create
+    // tip: protected = 동일 패키지에 속하는 클래스와 하위 클래스 관계의 클래스에 의해 접근이 가능하다. 
+    protected abstract Product createProduct(String owner);
+    // Some other function #1
+    protected abstract void registerProduct(Product product);
+}
+</code></pre>
+                        <h2 id="product">
+                            <a href="#product" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Product</h2>
+                        <p>생성될 객체의 인터페이스 정도, abstract class 기능을 가져도 무방할 듯</p>
+                        <pre><code class="language-java">package com.hyuky.framework;
+
+public abstract class Product {
+    public abstract void use();
+}
+</code></pre>
+                        <h2 id="concrete-creator">
+                            <a href="#concrete-creator" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Concrete Creator</h2>
+                        <p>Creator method에서 동작할 상세 구현내용을 작성한다.</p>
+                        <pre><code class="language-java">package com.hyuky.idcard;
+
+import java.util.ArrayList;
+import java.util.List;
+import com.hyuky.framework.*;
+
+// Creator Factory
+public class IDCardFactory extends Factory {
+    private List&#x3C;String> ownerList = new ArrayList&#x3C;String>();
+    
+    // Create only
+    @Override
+    protected Product createProduct(String owner) {
+        return new IDCard(owner);
+    }
+
+    // Some other function #1
+    @Override
+    protected void registerProduct(Product product) {
+        ownerList.add(((IDCard) product).getOwner());
+    }
+
+    public List&#x3C;String> getOwnerList() {
+        return ownerList;
+    }
+}
+</code></pre>
+                        <h2 id="concrete-product">
+                            <a href="#concrete-product" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Concrete Product</h2>
+                        <pre><code class="language-java">package com.hyuky.idcard;
+
+import com.hyuky.framework.Product;
+
+public class IDCard extends Product {
+    private String owner;
+
+    //Constructor
+    IDCard(String owner) {
+        System.out.println(owner + "'s card make");
+        this.owner = owner;
+    }
+
+    @Override
+    public void use() {
+        System.out.println(owner + "'s use card");
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+}
+</code></pre>
+                        <h2 id="main">
+                            <a href="#main" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Main</h2>
+                        <pre><code class="language-java">package com.hyuky;
+
+import com.hyuky.framework.Factory;
+import com.hyuky.framework.Product;
+import com.hyuky.idcard.IDCardFactory;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Product card1 = factory.create("Ann");
+        Product card2 = factory.create("Mike");
+        Product card3 = factory.create("Brown");
+
+        card1.use();
+        card2.use();
+        card3.use();
+
+        System.out.println(((IDCardFactory) factory).getOwnerList());
+    }
+}
+</code></pre>
+                        <h2 id="main-결과">
+                            <a href="#main-%EA%B2%B0%EA%B3%BC" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Main 결과</h2>
+                        <pre><code>Ann's card make
+Mike's card make
+Brown's card make
+Ann's use card
+Mike's use card
+Brown's use card
+[Ann, Mike, Brown]
+</code></pre>
+                    </div>
+                </article>
+            </section>
+            <footer>© 2017
+                <a>flybook</a>. All rights reserved.</footer>
+        </div>
+    </div>
+</body>
+
+</html>
