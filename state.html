@@ -1,11 +1,8 @@
-
-    <!DOCTYPE html>
-    <html>
-      <meta charset="UTF-8" />
-      <title>State</title>
-      <meta
-        name="description"
-        content="State 패턴
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<title>State</title>
+<meta name="description" content="State 패턴
 
 UML
 
@@ -19,39 +16,134 @@ UML
 
 
 
-예제로 치기도 힘드"
-      />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+예제로 치기도 힘드" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <link
-        href="//fonts.googleapis.com/css?family=Rubik|Unica+One"
-        rel="stylesheet"
-      />
-      <link rel="stylesheet" href=".\static/css/normalize.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/light.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
-      <style>
-        body, .markdown-body {
-          font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        }
-      </style>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-      <script src=".\static/main.js?f3c97be3b6d9ca15"></script>
-      <body>
-        <div id="root"><div class="wrap container-fluid"><header class="site-header"><h1><a href="/">flybook</a></h1><nav class="nav-link"><a href="/">Home</a><a href="https://hearimm">Git</a><a href="#" class="more"><svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg></a></nav></header><section class="row main"><aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><div class="chap"><span class="chap-title"></span><ul><li class=""><a href=".%5Cadaptor.html">Adaptor</a></li><li class=""><a href=".%5Citerator.html">Iterator</a></li><li class=""><a href=".%5Ctemplate.html">Template</a></li><li class=""><a href=".%5CabstractFactory.html">Abstractfactory</a></li><li class=""><a href=".%5Cbridge.html">Bridge</a></li><li class=""><a href=".%5Cbuilder.html">Builder</a></li><li class=""><a href=".%5CchainOfResponsibility.html">Chainofresponsibility</a></li><li class=""><a href=".%5CCommand.html">Command</a></li><li class=""><a href=".%5CeffectiveJavaBuild.html">Effectivejavabuild</a></li><li class=""><a href=".%5Cfacade.html">Facade</a></li><li class=""><a href=".%5CfactoryMethod.html">Factorymethod</a></li><li class=""><a href=".%5CflyWeight.html">Flyweight</a></li><li class=""><a href=".%5CInterpreter.html">Interpreter</a></li><li class=""><a href=".%5Cmediator.html">Mediator</a></li><li class=""><a href=".%5Cmemento.html">Memento</a></li><li class=""><a href=".%5Cobserver.html">Observer</a></li><li class=""><a href=".%5Cprototype.html">Prototype</a></li><li class=""><a href=".%5Cproxy.html">Proxy</a></li><li class=""><a href=".%5Csingleton.html">Singleton</a></li><li class="active"><a href=".%5Cstate.html">State</a></li><li class=""><a href=".%5Cvisitor.html">Visitor</a></li></ul></div></aside><article class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><div class="markdown-body"><h1 id="state-패턴"><a href="#state-%ED%8C%A8%ED%84%B4" aria-hidden="true"><span class="icon icon-link"></span></a>State 패턴</h1>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/W3sDesign_State_Design_Pattern_UML.jpg" alt="UML"></p>
-<h2 id="왜쓸까"><a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true"><span class="icon icon-link"></span></a>왜쓸까</h2>
-<p>맥도날드 상태값을 나눈다고 생각하면 보통 아래처럼 나눌 것이다.</p>
-<pre><code class="language-java">    if(주간){
+<link href="//fonts.googleapis.com/css?family=Rubik|Unica+One" rel="stylesheet" />
+<link rel="stylesheet" href=".\static/css/normalize.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/light.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+<style>
+    body,
+    .markdown-body {
+        font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src=".\static/main.js?cfef39a759eb9a87"></script>
+
+<body>
+    <div id="root">
+        <div class="wrap container-fluid">
+            <header class="site-header">
+                <h1>
+                    <a href="/GOF-DesignPattern/">flybook</a>
+                </h1>
+                <nav class="nav-link">
+                    <a href="/GOF-DesignPattern/">Home</a>
+                    <a href="https://hearimm.github.io/GOF-DesignPattern/">Git</a>
+                    <a href="#" class="more">
+                        <svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18">
+                            <path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </header>
+            <section class="row main">
+                <aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="chap">
+                        <span class="chap-title"></span>
+                        <ul>
+                            <li class="">
+                                <a href="adaptor.html">Adaptor</a>
+                            </li>
+                            <li class="">
+                                <a href="iterator.html">Iterator</a>
+                            </li>
+                            <li class="">
+                                <a href="template.html">Template</a>
+                            </li>
+                            <li class="">
+                                <a href="abstractFactory.html">Abstractfactory</a>
+                            </li>
+                            <li class="">
+                                <a href="bridge.html">Bridge</a>
+                            </li>
+                            <li class="">
+                                <a href="builder.html">Builder</a>
+                            </li>
+                            <li class="">
+                                <a href="chainOfResponsibility.html">Chainofresponsibility</a>
+                            </li>
+                            <li class="">
+                                <a href="Command.html">Command</a>
+                            </li>
+                            <li class="">
+                                <a href="effectiveJavaBuild.html">Effectivejavabuild</a>
+                            </li>
+                            <li class="">
+                                <a href="facade.html">Facade</a>
+                            </li>
+                            <li class="">
+                                <a href="factoryMethod.html">Factorymethod</a>
+                            </li>
+                            <li class="">
+                                <a href="flyWeight.html">Flyweight</a>
+                            </li>
+                            <li class="">
+                                <a href="Interpreter.html">Interpreter</a>
+                            </li>
+                            <li class="">
+                                <a href="mediator.html">Mediator</a>
+                            </li>
+                            <li class="">
+                                <a href="memento.html">Memento</a>
+                            </li>
+                            <li class="">
+                                <a href="observer.html">Observer</a>
+                            </li>
+                            <li class="">
+                                <a href="prototype.html">Prototype</a>
+                            </li>
+                            <li class="">
+                                <a href="proxy.html">Proxy</a>
+                            </li>
+                            <li class="">
+                                <a href="singleton.html">Singleton</a>
+                            </li>
+                            <li class="active">
+                                <a href="state.html">State</a>
+                            </li>
+                            <li class="">
+                                <a href="visitor.html">Visitor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <article class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <div class="markdown-body">
+                        <h1 id="state-패턴">
+                            <a href="#state-%ED%8C%A8%ED%84%B4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>State 패턴</h1>
+                        <p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/W3sDesign_State_Design_Pattern_UML.jpg" alt="UML">
+                        </p>
+                        <h2 id="왜쓸까">
+                            <a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>왜쓸까</h2>
+                        <p>맥도날드 상태값을 나눈다고 생각하면 보통 아래처럼 나눌 것이다.</p>
+                        <pre><code class="language-java">    if(주간){
         // 평상시 동작
     }else if(런치) {
         // 런치 동작
     }
 </code></pre>
-<p>예를들어 method 가 20개 있다고 가정하자.</p>
-<pre><code class="language-java">    빅맥
+                        <p>예를들어 method 가 20개 있다고 가정하자.</p>
+                        <pre><code class="language-java">    빅맥
         if(주간){
 
         } else if(런치){
@@ -64,17 +156,23 @@ UML
 
         }
 </code></pre>
-<p>예제로 치기도 힘드니까...대충 20개 있다고 가정하고..</p>
-<p>여기에 갑자기...모닝 시간 동작이 추가 된다고 하면...</p>
-<p>else if 를 20개 넣고...그안에서 또 다른 분기가 탄다고 가정하면 눈이 빠질것이다.</p>
-<p>OOP에서 오브젝트를 사물에 기대어 사용하기도 하지만,</p>
-<p>이 패턴에서처럼 상태에 대해서도 Class를 만들어 사용해 볼수 있다.</p>
-<h2 id="예제"><a href="#%EC%98%88%EC%A0%9C" aria-hidden="true"><span class="icon icon-link"></span></a>예제</h2>
-<p>예제에선 찾아본 패턴들 중에 가장 이해하기 쉽고 정석적으로 설명해 놓은 코드를 적어 보았다.</p>
-<p>천장에달린 선풍기 예제</p>
-<p>당길때 마다 상태가 변하는 걸 코드로 표현했다.</p>
-<h3 id="beforejava"><a href="#beforejava" aria-hidden="true"><span class="icon icon-link"></span></a>Before.java</h3>
-<pre><code class="language-java">// Not good: unwieldy "case" statement
+                        <p>예제로 치기도 힘드니까...대충 20개 있다고 가정하고..</p>
+                        <p>여기에 갑자기...모닝 시간 동작이 추가 된다고 하면...</p>
+                        <p>else if 를 20개 넣고...그안에서 또 다른 분기가 탄다고 가정하면 눈이 빠질것이다.</p>
+                        <p>OOP에서 오브젝트를 사물에 기대어 사용하기도 하지만,</p>
+                        <p>이 패턴에서처럼 상태에 대해서도 Class를 만들어 사용해 볼수 있다.</p>
+                        <h2 id="예제">
+                            <a href="#%EC%98%88%EC%A0%9C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>예제</h2>
+                        <p>예제에선 찾아본 패턴들 중에 가장 이해하기 쉽고 정석적으로 설명해 놓은 코드를 적어 보았다.</p>
+                        <p>천장에달린 선풍기 예제</p>
+                        <p>당길때 마다 상태가 변하는 걸 코드로 표현했다.</p>
+                        <h3 id="beforejava">
+                            <a href="#beforejava" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Before.java</h3>
+                        <pre><code class="language-java">// Not good: unwieldy "case" statement
     class CeilingFanPullChain {
         private int currentState;
 
@@ -116,8 +214,11 @@ UML
     * fan : OFF SPEED
     */
 </code></pre>
-<h3 id="afterjava"><a href="#afterjava" aria-hidden="true"><span class="icon icon-link"></span></a>After.java</h3>
-<pre><code class="language-java">    /*
+                        <h3 id="afterjava">
+                            <a href="#afterjava" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>After.java</h3>
+                        <pre><code class="language-java">    /*
     The CeilingFanPullChain class is now a wrapper that delegates to its m_current_state reference.
     Each clause from the "before" case statement is now captured in a State derived class.
     For this simple domain, the State pattern is probably over-kill.
@@ -187,43 +288,66 @@ UML
     * fan : OFF SPEED
     */
 </code></pre>
-<p>코드를 보면 너무 단순한 예제를 사용하다 보니</p>
-<p>왜 저고생을 하나? 생각 할 수도 있지만,</p>
-<p>코드는 시간이 지날수록 복잡도가 증가하게 되고, 새로운 상태를 항상 준비해야 한다.</p>
-<p>확장에 용이 하도록 미리 설계해 두는게 이 패턴의 목적!</p>
-<h2 id="책에서-설명하는-생각해보기"><a href="#%EC%B1%85%EC%97%90%EC%84%9C-%EC%84%A4%EB%AA%85%ED%95%98%EB%8A%94-%EC%83%9D%EA%B0%81%ED%95%B4%EB%B3%B4%EA%B8%B0" aria-hidden="true"><span class="icon icon-link"></span></a>책에서 설명하는 생각해보기</h2>
-<h3 id="분할해서-통치해라divide-and-conquer"><a href="#%EB%B6%84%ED%95%A0%ED%95%B4%EC%84%9C-%ED%86%B5%EC%B9%98%ED%95%B4%EB%9D%BCdivide-and-conquer" aria-hidden="true"><span class="icon icon-link"></span></a>분할해서 통치해라(divide and conquer)</h3>
-<p>분할해서 통치해라(divide and conquer) 는 복잡하고 규모가 큰 프로그램을 취급할 경우의 방침입니다.</p>
-<p>규모가 크고 복잡한 문제는 그대로 해결하려고 해서는 안됩니다.</p>
-<p>문제를 작은 단위로 나누고, 그래도 해결이 힘들면 더 작게 나눕니다.</p>
-<p>State패턴은 각각의 상태를 클래스로 구현해 문제를 분할합니다.</p>
-<p>하나의 ConcreteState 역할의 클래스를 코딩하고 있으면 프로그래머는 다른 클래스에 대한 생각을 잠시(어느 정도) 잊을 수 있습니다.(?!)</p>
-<h3 id="상태에-의존한-처리"><a href="#%EC%83%81%ED%83%9C%EC%97%90-%EC%9D%98%EC%A1%B4%ED%95%9C-%EC%B2%98%EB%A6%AC" aria-hidden="true"><span class="icon icon-link"></span></a>상태에 의존한 처리</h3>
-<p>chain.pull();을하면, chain은 Context안에 있는 method지만,</p>
-<p>Context안의 pull을 들여다보면,State.pull() 로 위임하고 있습니다.</p>
-<h3 id="상태전환은-누가-관리해야-하는가"><a href="#%EC%83%81%ED%83%9C%EC%A0%84%ED%99%98%EC%9D%80-%EB%88%84%EA%B0%80-%EA%B4%80%EB%A6%AC%ED%95%B4%EC%95%BC-%ED%95%98%EB%8A%94%EA%B0%80" aria-hidden="true"><span class="icon icon-link"></span></a>상태전환은 누가 관리해야 하는가?</h3>
-<p>상태클래스를 표현해서 상태에 의존한 동작을 각각의 ConcreteState 역할에 분담시키는 방법은 매우 좋은 방법입니다.</p>
-<p>그러나, State패턴을 사용할 경우 상태전환은 누가 관리해야 하는 지는 주의해야 합니다.</p>
-<p>예제 프로그램에선 pull() 메소드를 실행하면,
-ConcreteState에서 Context의 state를 다음 state로 변경해줍니다.</p>
-<p>상태전환을 상태에 의존한 동작으로 간주하고 있습니다.</p>
-<p>이방법은 장점과 단점이 있습니다.</p>
-<p>장점은 다른상태로 전환하는것은 언제하는것인가 하는 정보가 하나의 클래스 내에 정리되어 있는 점 입니다.</p>
-<p>즉, Mid클래스가 다른상태로 어떤걸 전환하는지 알려면,
-Mid클래스를 열어보면 됩니다.</p>
-<p>단점은 하나의 ConcreteState 역할이 다른 ConcreteState 역할을 알아야 한다는 점입니다.(다른 Concrete 클래스에 의존성이 생김.)</p>
-<p>예제 프로그램과 같은 방법을 포기하고,
-Context가 모든 상태전환을 맡을 수도 있습니다.</p>
-<p>그렇게 하면 각각의 ConcreteState 역할의 독립성이 높아져서 프로그램 전체의 예측이 좋아지는 경우가 있습니다.</p>
-<p>반면, Context역할이 모든 ConcreteState역할을 알아야 하는 문제가 발생합니다.</p>
-<p>여기에 Mediator 패턴을 적용할 수 있을지도 모릅니다.</p>
-<h3 id="자기모순에-빠지지-않는다"><a href="#%EC%9E%90%EA%B8%B0%EB%AA%A8%EC%88%9C%EC%97%90-%EB%B9%A0%EC%A7%80%EC%A7%80-%EC%95%8A%EB%8A%94%EB%8B%A4" aria-hidden="true"><span class="icon icon-link"></span></a>자기모순에 빠지지 않는다.</h3>
-<p>State패턴을 사용하지 않고 공통변수로 담아서 사용한다고 할때,
-중간에 값이 바뀌지 않는 경우가 생기면, 엉뚱한 값을 들고 있을 수 있습니다.</p>
-<p>ex) 모닝 상태인데, 런치 메뉴를 팔고 있다 던지...</p>
-<h3 id="새로운-상태를-추가하는-것은-간단하다"><a href="#%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%83%81%ED%83%9C%EB%A5%BC-%EC%B6%94%EA%B0%80%ED%95%98%EB%8A%94-%EA%B2%83%EC%9D%80-%EA%B0%84%EB%8B%A8%ED%95%98%EB%8B%A4" aria-hidden="true"><span class="icon icon-link"></span></a>새로운 상태를 추가하는 것은 간단하다.</h3>
-<p>ConcreteClass를 추가하면 되고, interface에 메소드가 강제되니까, 항상 같은 method를 사용합니다.</p>
-</div></article></section><footer>© 2017 <a>flybook</a>. All rights reserved.</footer></div></div>
-      </body>
-    </html>
-  
+                        <p>코드를 보면 너무 단순한 예제를 사용하다 보니</p>
+                        <p>왜 저고생을 하나? 생각 할 수도 있지만,</p>
+                        <p>코드는 시간이 지날수록 복잡도가 증가하게 되고, 새로운 상태를 항상 준비해야 한다.</p>
+                        <p>확장에 용이 하도록 미리 설계해 두는게 이 패턴의 목적!</p>
+                        <h2 id="책에서-설명하는-생각해보기">
+                            <a href="#%EC%B1%85%EC%97%90%EC%84%9C-%EC%84%A4%EB%AA%85%ED%95%98%EB%8A%94-%EC%83%9D%EA%B0%81%ED%95%B4%EB%B3%B4%EA%B8%B0"
+                                aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>책에서 설명하는 생각해보기</h2>
+                        <h3 id="분할해서-통치해라divide-and-conquer">
+                            <a href="#%EB%B6%84%ED%95%A0%ED%95%B4%EC%84%9C-%ED%86%B5%EC%B9%98%ED%95%B4%EB%9D%BCdivide-and-conquer" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>분할해서 통치해라(divide and conquer)</h3>
+                        <p>분할해서 통치해라(divide and conquer) 는 복잡하고 규모가 큰 프로그램을 취급할 경우의 방침입니다.</p>
+                        <p>규모가 크고 복잡한 문제는 그대로 해결하려고 해서는 안됩니다.</p>
+                        <p>문제를 작은 단위로 나누고, 그래도 해결이 힘들면 더 작게 나눕니다.</p>
+                        <p>State패턴은 각각의 상태를 클래스로 구현해 문제를 분할합니다.</p>
+                        <p>하나의 ConcreteState 역할의 클래스를 코딩하고 있으면 프로그래머는 다른 클래스에 대한 생각을 잠시(어느 정도) 잊을 수 있습니다.(?!)</p>
+                        <h3 id="상태에-의존한-처리">
+                            <a href="#%EC%83%81%ED%83%9C%EC%97%90-%EC%9D%98%EC%A1%B4%ED%95%9C-%EC%B2%98%EB%A6%AC" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>상태에 의존한 처리</h3>
+                        <p>chain.pull();을하면, chain은 Context안에 있는 method지만,</p>
+                        <p>Context안의 pull을 들여다보면,State.pull() 로 위임하고 있습니다.</p>
+                        <h3 id="상태전환은-누가-관리해야-하는가">
+                            <a href="#%EC%83%81%ED%83%9C%EC%A0%84%ED%99%98%EC%9D%80-%EB%88%84%EA%B0%80-%EA%B4%80%EB%A6%AC%ED%95%B4%EC%95%BC-%ED%95%98%EB%8A%94%EA%B0%80"
+                                aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>상태전환은 누가 관리해야 하는가?</h3>
+                        <p>상태클래스를 표현해서 상태에 의존한 동작을 각각의 ConcreteState 역할에 분담시키는 방법은 매우 좋은 방법입니다.</p>
+                        <p>그러나, State패턴을 사용할 경우 상태전환은 누가 관리해야 하는 지는 주의해야 합니다.</p>
+                        <p>예제 프로그램에선 pull() 메소드를 실행하면, ConcreteState에서 Context의 state를 다음 state로 변경해줍니다.</p>
+                        <p>상태전환을 상태에 의존한 동작으로 간주하고 있습니다.</p>
+                        <p>이방법은 장점과 단점이 있습니다.</p>
+                        <p>장점은 다른상태로 전환하는것은 언제하는것인가 하는 정보가 하나의 클래스 내에 정리되어 있는 점 입니다.</p>
+                        <p>즉, Mid클래스가 다른상태로 어떤걸 전환하는지 알려면, Mid클래스를 열어보면 됩니다.</p>
+                        <p>단점은 하나의 ConcreteState 역할이 다른 ConcreteState 역할을 알아야 한다는 점입니다.(다른 Concrete 클래스에 의존성이 생김.)</p>
+                        <p>예제 프로그램과 같은 방법을 포기하고, Context가 모든 상태전환을 맡을 수도 있습니다.</p>
+                        <p>그렇게 하면 각각의 ConcreteState 역할의 독립성이 높아져서 프로그램 전체의 예측이 좋아지는 경우가 있습니다.</p>
+                        <p>반면, Context역할이 모든 ConcreteState역할을 알아야 하는 문제가 발생합니다.</p>
+                        <p>여기에 Mediator 패턴을 적용할 수 있을지도 모릅니다.</p>
+                        <h3 id="자기모순에-빠지지-않는다">
+                            <a href="#%EC%9E%90%EA%B8%B0%EB%AA%A8%EC%88%9C%EC%97%90-%EB%B9%A0%EC%A7%80%EC%A7%80-%EC%95%8A%EB%8A%94%EB%8B%A4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>자기모순에 빠지지 않는다.</h3>
+                        <p>State패턴을 사용하지 않고 공통변수로 담아서 사용한다고 할때, 중간에 값이 바뀌지 않는 경우가 생기면, 엉뚱한 값을 들고 있을 수 있습니다.</p>
+                        <p>ex) 모닝 상태인데, 런치 메뉴를 팔고 있다 던지...</p>
+                        <h3 id="새로운-상태를-추가하는-것은-간단하다">
+                            <a href="#%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%83%81%ED%83%9C%EB%A5%BC-%EC%B6%94%EA%B0%80%ED%95%98%EB%8A%94-%EA%B2%83%EC%9D%80-%EA%B0%84%EB%8B%A8%ED%95%98%EB%8B%A4"
+                                aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>새로운 상태를 추가하는 것은 간단하다.</h3>
+                        <p>ConcreteClass를 추가하면 되고, interface에 메소드가 강제되니까, 항상 같은 method를 사용합니다.</p>
+                    </div>
+                </article>
+            </section>
+            <footer>© 2017
+                <a>flybook</a>. All rights reserved.</footer>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,46 +1,142 @@
-
-    <!DOCTYPE html>
-    <html>
-      <meta charset="UTF-8" />
-      <title>Effectivejavabuild</title>
-      <meta
-        name="description"
-        content="Effective Java Builder Pattern
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<title>Effectivejavabuild</title>
+<meta name="description" content="Effective Java Builder Pattern
 
 왜쓸까
 
 빌더 패턴은 오브젝트 작성 소프트웨어 설계 패턴입니다.
 
-다형성을 가능케하려는 추상 팩토리 패턴 및 팩토리 메소드"
-      />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+다형성을 가능케하려는 추상 팩토리 패턴 및 팩토리 메소드" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <link
-        href="//fonts.googleapis.com/css?family=Rubik|Unica+One"
-        rel="stylesheet"
-      />
-      <link rel="stylesheet" href=".\static/css/normalize.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/light.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
-      <style>
-        body, .markdown-body {
-          font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        }
-      </style>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-      <script src=".\static/main.js?f3c97be3b6d9ca15"></script>
-      <body>
-        <div id="root"><div class="wrap container-fluid"><header class="site-header"><h1><a href="/">flybook</a></h1><nav class="nav-link"><a href="/">Home</a><a href="https://hearimm">Git</a><a href="#" class="more"><svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg></a></nav></header><section class="row main"><aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><div class="chap"><span class="chap-title"></span><ul><li class=""><a href=".%5Cadaptor.html">Adaptor</a></li><li class=""><a href=".%5Citerator.html">Iterator</a></li><li class=""><a href=".%5Ctemplate.html">Template</a></li><li class=""><a href=".%5CabstractFactory.html">Abstractfactory</a></li><li class=""><a href=".%5Cbridge.html">Bridge</a></li><li class=""><a href=".%5Cbuilder.html">Builder</a></li><li class=""><a href=".%5CchainOfResponsibility.html">Chainofresponsibility</a></li><li class=""><a href=".%5CCommand.html">Command</a></li><li class="active"><a href=".%5CeffectiveJavaBuild.html">Effectivejavabuild</a></li><li class=""><a href=".%5Cfacade.html">Facade</a></li><li class=""><a href=".%5CfactoryMethod.html">Factorymethod</a></li><li class=""><a href=".%5CflyWeight.html">Flyweight</a></li><li class=""><a href=".%5CInterpreter.html">Interpreter</a></li><li class=""><a href=".%5Cmediator.html">Mediator</a></li><li class=""><a href=".%5Cmemento.html">Memento</a></li><li class=""><a href=".%5Cobserver.html">Observer</a></li><li class=""><a href=".%5Cprototype.html">Prototype</a></li><li class=""><a href=".%5Cproxy.html">Proxy</a></li><li class=""><a href=".%5Csingleton.html">Singleton</a></li><li class=""><a href=".%5Cstate.html">State</a></li><li class=""><a href=".%5Cvisitor.html">Visitor</a></li></ul></div></aside><article class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><div class="markdown-body"><h1 id="effective-java-builder-pattern"><a href="#effective-java-builder-pattern" aria-hidden="true"><span class="icon icon-link"></span></a>Effective Java Builder Pattern</h1>
-<h2 id="왜쓸까"><a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true"><span class="icon icon-link"></span></a>왜쓸까</h2>
-<p>빌더 패턴은 오브젝트 작성 소프트웨어 설계 패턴입니다.</p>
-<p>다형성을 가능케하려는 추상 팩토리 패턴 및 팩토리 메소드 패턴과는 달리,
-빌더 패턴의 의도는 오브젝트 생성자 매개 변수 조합의 증가가 생성자의 지수 목록으로 연결될 때 발생하는 텔레 스코핑 생성자 anti 패턴에 대한 해결책을 찾는 것입니다.</p>
-<p>수많은 생성자를 사용하는 대신 빌더 패턴은 단계별로 각 초기화 매개 변수를 수신 한 다음 작성된 결과 객체를 한 번에 리턴하는 다른 객체 인 빌더를 사용합니다.</p>
-<h2 id="코드로-보기"><a href="#%EC%BD%94%EB%93%9C%EB%A1%9C-%EB%B3%B4%EA%B8%B0" aria-hidden="true"><span class="icon icon-link"></span></a>코드로 보기</h2>
-<h3 id="텔레스코핑-생성자"><a href="#%ED%85%94%EB%A0%88%EC%8A%A4%EC%BD%94%ED%95%91-%EC%83%9D%EC%84%B1%EC%9E%90" aria-hidden="true"><span class="icon icon-link"></span></a>텔레스코핑 생성자</h3>
-<pre><code class="language-java">Class Person(){
+<link href="//fonts.googleapis.com/css?family=Rubik|Unica+One" rel="stylesheet" />
+<link rel="stylesheet" href=".\static/css/normalize.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/light.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+<style>
+    body,
+    .markdown-body {
+        font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src=".\static/main.js?cfef39a759eb9a87"></script>
+
+<body>
+    <div id="root">
+        <div class="wrap container-fluid">
+            <header class="site-header">
+                <h1>
+                    <a href="/GOF-DesignPattern/">flybook</a>
+                </h1>
+                <nav class="nav-link">
+                    <a href="/GOF-DesignPattern/">Home</a>
+                    <a href="https://hearimm.github.io/GOF-DesignPattern/">Git</a>
+                    <a href="#" class="more">
+                        <svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18">
+                            <path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </header>
+            <section class="row main">
+                <aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="chap">
+                        <span class="chap-title"></span>
+                        <ul>
+                            <li class="">
+                                <a href="adaptor.html">Adaptor</a>
+                            </li>
+                            <li class="">
+                                <a href="iterator.html">Iterator</a>
+                            </li>
+                            <li class="">
+                                <a href="template.html">Template</a>
+                            </li>
+                            <li class="">
+                                <a href="abstractFactory.html">Abstractfactory</a>
+                            </li>
+                            <li class="">
+                                <a href="bridge.html">Bridge</a>
+                            </li>
+                            <li class="">
+                                <a href="builder.html">Builder</a>
+                            </li>
+                            <li class="">
+                                <a href="chainOfResponsibility.html">Chainofresponsibility</a>
+                            </li>
+                            <li class="">
+                                <a href="Command.html">Command</a>
+                            </li>
+                            <li class="active">
+                                <a href="effectiveJavaBuild.html">Effectivejavabuild</a>
+                            </li>
+                            <li class="">
+                                <a href="facade.html">Facade</a>
+                            </li>
+                            <li class="">
+                                <a href="factoryMethod.html">Factorymethod</a>
+                            </li>
+                            <li class="">
+                                <a href="flyWeight.html">Flyweight</a>
+                            </li>
+                            <li class="">
+                                <a href="Interpreter.html">Interpreter</a>
+                            </li>
+                            <li class="">
+                                <a href="mediator.html">Mediator</a>
+                            </li>
+                            <li class="">
+                                <a href="memento.html">Memento</a>
+                            </li>
+                            <li class="">
+                                <a href="observer.html">Observer</a>
+                            </li>
+                            <li class="">
+                                <a href="prototype.html">Prototype</a>
+                            </li>
+                            <li class="">
+                                <a href="proxy.html">Proxy</a>
+                            </li>
+                            <li class="">
+                                <a href="singleton.html">Singleton</a>
+                            </li>
+                            <li class="">
+                                <a href="state.html">State</a>
+                            </li>
+                            <li class="">
+                                <a href="visitor.html">Visitor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <article class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <div class="markdown-body">
+                        <h1 id="effective-java-builder-pattern">
+                            <a href="#effective-java-builder-pattern" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Effective Java Builder Pattern</h1>
+                        <h2 id="왜쓸까">
+                            <a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>왜쓸까</h2>
+                        <p>빌더 패턴은 오브젝트 작성 소프트웨어 설계 패턴입니다.</p>
+                        <p>다형성을 가능케하려는 추상 팩토리 패턴 및 팩토리 메소드 패턴과는 달리, 빌더 패턴의 의도는 오브젝트 생성자 매개 변수 조합의 증가가 생성자의 지수 목록으로 연결될 때 발생하는
+                            텔레 스코핑 생성자 anti 패턴에 대한 해결책을 찾는 것입니다.</p>
+                        <p>수많은 생성자를 사용하는 대신 빌더 패턴은 단계별로 각 초기화 매개 변수를 수신 한 다음 작성된 결과 객체를 한 번에 리턴하는 다른 객체 인 빌더를 사용합니다.</p>
+                        <h2 id="코드로-보기">
+                            <a href="#%EC%BD%94%EB%93%9C%EB%A1%9C-%EB%B3%B4%EA%B8%B0" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>코드로 보기</h2>
+                        <h3 id="텔레스코핑-생성자">
+                            <a href="#%ED%85%94%EB%A0%88%EC%8A%A4%EC%BD%94%ED%95%91-%EC%83%9D%EC%84%B1%EC%9E%90" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>텔레스코핑 생성자</h3>
+                        <pre><code class="language-java">Class Person(){
     int age, height, weight;
     String name;
     Person(String name){
@@ -67,8 +163,11 @@ Person p2 = new Person("최혁",31);
 Person p3 = new Person("최혁",31,180);
 Person p4 = new Person("최혁",31,180,73);
 </code></pre>
-<h3 id="java-beans-패턴"><a href="#java-beans-%ED%8C%A8%ED%84%B4" aria-hidden="true"><span class="icon icon-link"></span></a>Java Beans 패턴</h3>
-<pre><code class="language-java">Class Person(){
+                        <h3 id="java-beans-패턴">
+                            <a href="#java-beans-%ED%8C%A8%ED%84%B4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Java Beans 패턴</h3>
+                        <pre><code class="language-java">Class Person(){
     int age, height, weight;
     String name;
     /*setter 작성했다고 가정*/
@@ -82,8 +181,11 @@ person.setAge(31);
 person.setHeight(180);
 person.setWeight(73);
 </code></pre>
-<h3 id="builder-패턴"><a href="#builder-%ED%8C%A8%ED%84%B4" aria-hidden="true"><span class="icon icon-link"></span></a>Builder 패턴</h3>
-<pre><code class="language-java">Class Person() {
+                        <h3 id="builder-패턴">
+                            <a href="#builder-%ED%8C%A8%ED%84%B4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Builder 패턴</h3>
+                        <pre><code class="language-java">Class Person() {
     int age, height, weight;
     String name;
 
@@ -117,7 +219,13 @@ Person person = new Person.Builder("최혁")
                         .weight(73)
                         .build();
 </code></pre>
-</div></article></section><footer>© 2017 <a>flybook</a>. All rights reserved.</footer></div></div>
-      </body>
-    </html>
-  
+                    </div>
+                </article>
+            </section>
+            <footer>© 2017
+                <a>flybook</a>. All rights reserved.</footer>
+        </div>
+    </div>
+</body>
+
+</html>

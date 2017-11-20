@@ -1,63 +1,164 @@
-
-    <!DOCTYPE html>
-    <html>
-      <meta charset="UTF-8" />
-      <title>Template</title>
-      <meta
-        name="description"
-        content="Template 패턴
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<title>Template</title>
+<meta name="description" content="Template 패턴
 
 나만의 Template Example
 
 FileToDb라는 abstract class에서 동작순서대로 흐르는 
 
-writeDb()라는 메소드를 공통으로 사용"
-      />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+writeDb()라는 메소드를 공통으로 사용" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <link
-        href="//fonts.googleapis.com/css?family=Rubik|Unica+One"
-        rel="stylesheet"
-      />
-      <link rel="stylesheet" href=".\static/css/normalize.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/light.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
-      <style>
-        body, .markdown-body {
-          font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        }
-      </style>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-      <script src=".\static/main.js?f3c97be3b6d9ca15"></script>
-      <body>
-        <div id="root"><div class="wrap container-fluid"><header class="site-header"><h1><a href="/">flybook</a></h1><nav class="nav-link"><a href="/">Home</a><a href="https://hearimm">Git</a><a href="#" class="more"><svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg></a></nav></header><section class="row main"><aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><div class="chap"><span class="chap-title"></span><ul><li class=""><a href=".%5Cadaptor.html">Adaptor</a></li><li class=""><a href=".%5Citerator.html">Iterator</a></li><li class="active"><a href=".%5Ctemplate.html">Template</a></li><li class=""><a href=".%5CabstractFactory.html">Abstractfactory</a></li><li class=""><a href=".%5Cbridge.html">Bridge</a></li><li class=""><a href=".%5Cbuilder.html">Builder</a></li><li class=""><a href=".%5CchainOfResponsibility.html">Chainofresponsibility</a></li><li class=""><a href=".%5CCommand.html">Command</a></li><li class=""><a href=".%5CeffectiveJavaBuild.html">Effectivejavabuild</a></li><li class=""><a href=".%5Cfacade.html">Facade</a></li><li class=""><a href=".%5CfactoryMethod.html">Factorymethod</a></li><li class=""><a href=".%5CflyWeight.html">Flyweight</a></li><li class=""><a href=".%5CInterpreter.html">Interpreter</a></li><li class=""><a href=".%5Cmediator.html">Mediator</a></li><li class=""><a href=".%5Cmemento.html">Memento</a></li><li class=""><a href=".%5Cobserver.html">Observer</a></li><li class=""><a href=".%5Cprototype.html">Prototype</a></li><li class=""><a href=".%5Cproxy.html">Proxy</a></li><li class=""><a href=".%5Csingleton.html">Singleton</a></li><li class=""><a href=".%5Cstate.html">State</a></li><li class=""><a href=".%5Cvisitor.html">Visitor</a></li></ul></div></aside><article class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><div class="markdown-body"><h1 id="template-패턴"><a href="#template-%ED%8C%A8%ED%84%B4" aria-hidden="true"><span class="icon icon-link"></span></a>Template 패턴</h1>
-<h2 id="나만의-template-example"><a href="#%EB%82%98%EB%A7%8C%EC%9D%98-template-example" aria-hidden="true"><span class="icon icon-link"></span></a>나만의 Template Example</h2>
-<p>FileToDb라는 abstract class에서 동작순서대로 흐르는 </p>
-<p>writeDb()라는 메소드를 공통으로 사용하게 끔 만든다.</p>
-<p>writeDb() 를 final 로 선언한건 수정안되게...?</p>
-<p>그리고 abstract 메소드들은 상속받은 클래스가 구현하도록 하기 위함.</p>
-<p><strong>targetFile(폴더주소)</strong></p>
-<pre><code>폴더를 변경해서 지정할수 있도록 하기 위함.
+<link href="//fonts.googleapis.com/css?family=Rubik|Unica+One" rel="stylesheet" />
+<link rel="stylesheet" href=".\static/css/normalize.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/light.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+<style>
+    body,
+    .markdown-body {
+        font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src=".\static/main.js?cfef39a759eb9a87"></script>
+
+<body>
+    <div id="root">
+        <div class="wrap container-fluid">
+            <header class="site-header">
+                <h1>
+                    <a href="/GOF-DesignPattern/">flybook</a>
+                </h1>
+                <nav class="nav-link">
+                    <a href="/GOF-DesignPattern/">Home</a>
+                    <a href="https://hearimm.github.io/GOF-DesignPattern/">Git</a>
+                    <a href="#" class="more">
+                        <svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18">
+                            <path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </header>
+            <section class="row main">
+                <aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="chap">
+                        <span class="chap-title"></span>
+                        <ul>
+                            <li class="">
+                                <a href="adaptor.html">Adaptor</a>
+                            </li>
+                            <li class="">
+                                <a href="iterator.html">Iterator</a>
+                            </li>
+                            <li class="active">
+                                <a href="template.html">Template</a>
+                            </li>
+                            <li class="">
+                                <a href="abstractFactory.html">Abstractfactory</a>
+                            </li>
+                            <li class="">
+                                <a href="bridge.html">Bridge</a>
+                            </li>
+                            <li class="">
+                                <a href="builder.html">Builder</a>
+                            </li>
+                            <li class="">
+                                <a href="chainOfResponsibility.html">Chainofresponsibility</a>
+                            </li>
+                            <li class="">
+                                <a href="Command.html">Command</a>
+                            </li>
+                            <li class="">
+                                <a href="effectiveJavaBuild.html">Effectivejavabuild</a>
+                            </li>
+                            <li class="">
+                                <a href="facade.html">Facade</a>
+                            </li>
+                            <li class="">
+                                <a href="factoryMethod.html">Factorymethod</a>
+                            </li>
+                            <li class="">
+                                <a href="flyWeight.html">Flyweight</a>
+                            </li>
+                            <li class="">
+                                <a href="Interpreter.html">Interpreter</a>
+                            </li>
+                            <li class="">
+                                <a href="mediator.html">Mediator</a>
+                            </li>
+                            <li class="">
+                                <a href="memento.html">Memento</a>
+                            </li>
+                            <li class="">
+                                <a href="observer.html">Observer</a>
+                            </li>
+                            <li class="">
+                                <a href="prototype.html">Prototype</a>
+                            </li>
+                            <li class="">
+                                <a href="proxy.html">Proxy</a>
+                            </li>
+                            <li class="">
+                                <a href="singleton.html">Singleton</a>
+                            </li>
+                            <li class="">
+                                <a href="state.html">State</a>
+                            </li>
+                            <li class="">
+                                <a href="visitor.html">Visitor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <article class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <div class="markdown-body">
+                        <h1 id="template-패턴">
+                            <a href="#template-%ED%8C%A8%ED%84%B4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Template 패턴</h1>
+                        <h2 id="나만의-template-example">
+                            <a href="#%EB%82%98%EB%A7%8C%EC%9D%98-template-example" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>나만의 Template Example</h2>
+                        <p>FileToDb라는 abstract class에서 동작순서대로 흐르는 </p>
+                        <p>writeDb()라는 메소드를 공통으로 사용하게 끔 만든다.</p>
+                        <p>writeDb() 를 final 로 선언한건 수정안되게...?</p>
+                        <p>그리고 abstract 메소드들은 상속받은 클래스가 구현하도록 하기 위함.</p>
+                        <p>
+                            <strong>targetFile(폴더주소)</strong>
+                        </p>
+                        <pre><code>폴더를 변경해서 지정할수 있도록 하기 위함.
 
 return: 파일을 String Array로 리턴해서 loop를 돌면서 사용한다.
 </code></pre>
-<p><strong>parsingFile(파일)</strong> </p>
-<pre><code>Loop를 돌면서 txt파일을 읽고 sql을 만들어낸다.
+                        <p>
+                            <strong>parsingFile(파일)</strong>
+                        </p>
+                        <pre><code>Loop를 돌면서 txt파일을 읽고 sql을 만들어낸다.
 
 return: SQL문 String Array
 </code></pre>
-<p><strong>mergeDb(SQL)</strong> </p>
-<pre><code>SQL문법을 받아 DB에 INSERT/UPDATE 하기 위함.
+                        <p>
+                            <strong>mergeDb(SQL)</strong>
+                        </p>
+                        <pre><code>SQL문법을 받아 DB에 INSERT/UPDATE 하기 위함.
 
 return: void
 </code></pre>
-<p><strong>writeDb()</strong></p>
-<pre><code>위 메소드로 알고리즘 정의(보통은 공통메소드)
+                        <p>
+                            <strong>writeDb()</strong>
+                        </p>
+                        <pre><code>위 메소드로 알고리즘 정의(보통은 공통메소드)
 </code></pre>
-<h3 id="abstract-class"><a href="#abstract-class" aria-hidden="true"><span class="icon icon-link"></span></a>Abstract class</h3>
-<pre><code class="language-java">public abstract class FileToDb {
+                        <h3 id="abstract-class">
+                            <a href="#abstract-class" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Abstract class</h3>
+                        <pre><code class="language-java">public abstract class FileToDb {
     String folderPath;
     
     public abstract String[] targetFile(String folderPath);
@@ -75,10 +176,13 @@ return: void
     }
 }
 </code></pre>
-<h3 id="concrete-class-1"><a href="#concrete-class-1" aria-hidden="true"><span class="icon icon-link"></span></a>Concrete Class #1</h3>
-<p>오라클 DB에 넣는다</p>
-<p>클래스 생성시 folderPath 는 부모클래스에 folderPath를 사용</p>
-<pre><code class="language-java">public class TxtToOracle extends FileToDb {
+                        <h3 id="concrete-class-1">
+                            <a href="#concrete-class-1" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Concrete Class #1</h3>
+                        <p>오라클 DB에 넣는다</p>
+                        <p>클래스 생성시 folderPath 는 부모클래스에 folderPath를 사용</p>
+                        <pre><code class="language-java">public class TxtToOracle extends FileToDb {
     
     TxtToOracle(String path){
         super.folderPath = path;
@@ -107,11 +211,13 @@ return: void
     }
 }
 </code></pre>
-<h3 id="concrete-class-2"><a href="#concrete-class-2" aria-hidden="true"><span class="icon icon-link"></span></a>Concrete Class #2</h3>
-<p>MySQL DB에 넣는다.</p>
-<p>Concrete Class#1 과 거의 같다.
-구체적인 내용만 변경해서 사용</p>
-<pre><code class="language-java">public class TxtToMysql extends FileToDb {
+                        <h3 id="concrete-class-2">
+                            <a href="#concrete-class-2" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Concrete Class #2</h3>
+                        <p>MySQL DB에 넣는다.</p>
+                        <p>Concrete Class#1 과 거의 같다. 구체적인 내용만 변경해서 사용</p>
+                        <pre><code class="language-java">public class TxtToMysql extends FileToDb {
     TxtToMysql(String path){
         super.folderPath = path;
     }
@@ -138,11 +244,14 @@ return: void
     }
 }
 </code></pre>
-<p>이처럼 같은 패턴이 반복되고, 공통으로 사용되는 함수가 있을땐 사용하면 좋을 것 같다.</p>
-<h3 id="hook-method"><a href="#hook-method" aria-hidden="true"><span class="icon icon-link"></span></a>Hook method</h3>
-<p>Abstract Class에 구현해 놓은 공통메소드에 수정이 되면 다른 부분도 다 수정이 된다.</p>
-<p>좀더 유연성을 주고싶을땐, Hook Method를 이용한다.</p>
-<pre><code class="language-java">public void endHookMethod(){
+                        <p>이처럼 같은 패턴이 반복되고, 공통으로 사용되는 함수가 있을땐 사용하면 좋을 것 같다.</p>
+                        <h3 id="hook-method">
+                            <a href="#hook-method" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Hook method</h3>
+                        <p>Abstract Class에 구현해 놓은 공통메소드에 수정이 되면 다른 부분도 다 수정이 된다.</p>
+                        <p>좀더 유연성을 주고싶을땐, Hook Method를 이용한다.</p>
+                        <pre><code class="language-java">public void endHookMethod(){
     // 훅메소드에 아무것도 정의하지 않고 둔다.
     // 자식클래스가 지지고 복도록 한다.
 }
@@ -159,8 +268,14 @@ public final void writeDb() {
         System.out.println("end of wrtieDb\n");
 }
 </code></pre>
-<p>abastract method가 아니기 때문에 강제성이 없어 유연성을 확보할 수 있다.</p>
-</div></article></section><footer>© 2017 <a>flybook</a>. All rights reserved.</footer></div></div>
-      </body>
-    </html>
-  
+                        <p>abastract method가 아니기 때문에 강제성이 없어 유연성을 확보할 수 있다.</p>
+                    </div>
+                </article>
+            </section>
+            <footer>© 2017
+                <a>flybook</a>. All rights reserved.</footer>
+        </div>
+    </div>
+</body>
+
+</html>

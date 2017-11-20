@@ -1,148 +1,268 @@
-
-    <!DOCTYPE html>
-    <html>
-      <meta charset="UTF-8" />
-      <title>Mediator</title>
-      <meta
-        name="description"
-        content="Mediator 중재자 패턴
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<title>Mediator</title>
+<meta name="description" content="Mediator 중재자 패턴
 
 Mediator 중재자 패턴
     \- 왜쓸까
     \- 등장인물
     \- 예제 소스
         \- Mediator
-        \- "
-      />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+        \- " />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <link
-        href="//fonts.googleapis.com/css?family=Rubik|Unica+One"
-        rel="stylesheet"
-      />
-      <link rel="stylesheet" href=".\static/css/normalize.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/light.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
-      <style>
-        body, .markdown-body {
-          font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        }
-      </style>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-      <script src=".\static/main.js?f3c97be3b6d9ca15"></script>
-      <body>
-        <div id="root"><div class="wrap container-fluid"><header class="site-header"><h1><a href="/">flybook</a></h1><nav class="nav-link"><a href="/">Home</a><a href="https://hearimm">Git</a><a href="#" class="more"><svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg></a></nav></header><section class="row main"><aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><div class="chap"><span class="chap-title"></span><ul><li class=""><a href=".%5Cadaptor.html">Adaptor</a></li><li class=""><a href=".%5Citerator.html">Iterator</a></li><li class=""><a href=".%5Ctemplate.html">Template</a></li><li class=""><a href=".%5CabstractFactory.html">Abstractfactory</a></li><li class=""><a href=".%5Cbridge.html">Bridge</a></li><li class=""><a href=".%5Cbuilder.html">Builder</a></li><li class=""><a href=".%5CchainOfResponsibility.html">Chainofresponsibility</a></li><li class=""><a href=".%5CCommand.html">Command</a></li><li class=""><a href=".%5CeffectiveJavaBuild.html">Effectivejavabuild</a></li><li class=""><a href=".%5Cfacade.html">Facade</a></li><li class=""><a href=".%5CfactoryMethod.html">Factorymethod</a></li><li class=""><a href=".%5CflyWeight.html">Flyweight</a></li><li class=""><a href=".%5CInterpreter.html">Interpreter</a></li><li class="active"><a href=".%5Cmediator.html">Mediator</a></li><li class=""><a href=".%5Cmemento.html">Memento</a></li><li class=""><a href=".%5Cobserver.html">Observer</a></li><li class=""><a href=".%5Cprototype.html">Prototype</a></li><li class=""><a href=".%5Cproxy.html">Proxy</a></li><li class=""><a href=".%5Csingleton.html">Singleton</a></li><li class=""><a href=".%5Cstate.html">State</a></li><li class=""><a href=".%5Cvisitor.html">Visitor</a></li></ul></div></aside><article class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><div class="markdown-body"><h1 id="mediator-중재자-패턴"><a href="#mediator-%EC%A4%91%EC%9E%AC%EC%9E%90-%ED%8C%A8%ED%84%B4" aria-hidden="true"><span class="icon icon-link"></span></a>Mediator 중재자 패턴</h1>
-<ul>
-<li>
-<p><a href="#mediator-%EC%A4%91%EC%9E%AC%EC%9E%90-%ED%8C%A8%ED%84%B4">Mediator 중재자 패턴</a>
-- <a href="#%EC%99%9C%EC%93%B8%EA%B9%8C">왜쓸까</a>
-- <a href="#%EB%93%B1%EC%9E%A5%EC%9D%B8%EB%AC%BC">등장인물</a>
-- <a href="#%EC%98%88%EC%A0%9C-%EC%86%8C%EC%8A%A4">예제 소스</a>
-- <a href="#mediator">Mediator</a>
-- <a href="#colleague">Colleague</a>
-- <a href="#concrete-colleague">Concrete Colleague</a>
-- <a href="#concrete-mediator">Concrete Mediator</a>
-- <a href="#main">Main</a></p>
-<h2 id="왜쓸까"><a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true"><span class="icon icon-link"></span></a>왜쓸까</h2>
-</li>
-</ul>
-<p><img src="https://i.gyazo.com/e4d318a385cde961ad92d13298ca6fe9.gif" alt="예제"></p>
-<p>위와 같이 로그인 화면 등에, 이벤트마다 연계되어 각 오브젝트들이 enable disable 되는 등 연계되는 프로그램을 짠다고 가정할때, 적용하기 좋은패턴이다.</p>
-<p>가장 간단하게 생각이 드는건, 모든 이벤트마다 그 후 동작을 작성하는것일거다.</p>
-<ol>
-<li>
-<p>Guest CheckBox 클래스안에서 선택이벤트에 text field 모두 disabled, backgroundcolor 변경, Ok Button 활성화</p>
-</li>
-<li>
-<p>Login Checkbox 클래스안에서 선택이벤트에 id textFeild enabled, backgroundcolor 변경 등등등</p>
-</li>
-<li>
-<p>...</p>
-</li>
-<li>
-<p>...</p>
-</li>
-</ol>
-<p>이렇게 따로 작성하다보면, 나중에 테스트 시, 클래스를 하나하나 들여다 보며 로직을 찾아야 한다.</p>
-<p>이렇게 복잡하게 엮이지 않고, 중간에 중재자를 한명두고, 중재자를 믿고 이벤트를 수행하도록 작성하도록 하는 패턴이다.</p>
-<p>중재자에게 복잡한 로직을 위임하고 통신을 중재자를 통해서 할 때,</p>
-<p>자기의 본 업무에 집중 할 수 있고(loose coupling), 로직을 점검할때도 용이 할 수 있다.</p>
-<p>책에서 나온 장점.</p>
-<ol>
-<li>
-<p>분산이 화를 부를때</p>
-<p>Concrete Colleague 통신 기능분산이 화를 자초한다.</p>
-</li>
-<li>
-<p>통신 경로의 증가</p>
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th align="center">오브젝트</th>
-<th align="center">통신 경우의 수</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">2개</td>
-<td align="center">2가지</td>
-</tr>
-<tr>
-<td align="center">3개</td>
-<td align="center">6가지</td>
-</tr>
-<tr>
-<td align="center">4개</td>
-<td align="center">12가지</td>
-</tr>
-<tr>
-<td align="center">5개</td>
-<td align="center">20가지</td>
-</tr>
-<tr>
-<td align="center">6개</td>
-<td align="center">30가지</td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>ConcreteColleague 의존성이 낮아 재이용이 용이하다.(Concrete Mediator는 재이용 힘듬)</li>
-</ol>
-<h2 id="등장인물"><a href="#%EB%93%B1%EC%9E%A5%EC%9D%B8%EB%AC%BC" aria-hidden="true"><span class="icon icon-link"></span></a>등장인물</h2>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Mediator_design_pattern.png" alt="클래스 다이어그램"></p>
-<p>Mediator(중재자) - interface 정의 / Colleague와 커뮤니케이션</p>
-<p>Concrete Mediator - Mediator 인터페이스를 구현하고 Colleague 오브젝트 간의 통신을 조정합니다. 상호 커뮤니 케이 션에 관해서 모든 Colleague와 그 목적을 알고 있습니다.</p>
-<p>Colleague(동료?) - interface 정의</p>
-<p>Concrete Colleague - interface구현(서로 통신할 객체)</p>
-<h2 id="예제-소스"><a href="#%EC%98%88%EC%A0%9C-%EC%86%8C%EC%8A%A4" aria-hidden="true"><span class="icon icon-link"></span></a>예제 소스</h2>
-<h3 id="mediator"><a href="#mediator" aria-hidden="true"><span class="icon icon-link"></span></a>Mediator</h3>
-<pre><code class="language-java">    public interface Mediator {
+<link href="//fonts.googleapis.com/css?family=Rubik|Unica+One" rel="stylesheet" />
+<link rel="stylesheet" href=".\static/css/normalize.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/light.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+<style>
+    body,
+    .markdown-body {
+        font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src=".\static/main.js?cfef39a759eb9a87"></script>
+
+<body>
+    <div id="root">
+        <div class="wrap container-fluid">
+            <header class="site-header">
+                <h1>
+                    <a href="/GOF-DesignPattern/">flybook</a>
+                </h1>
+                <nav class="nav-link">
+                    <a href="/GOF-DesignPattern/">Home</a>
+                    <a href="https://hearimm.github.io/GOF-DesignPattern/">Git</a>
+                    <a href="#" class="more">
+                        <svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18">
+                            <path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </header>
+            <section class="row main">
+                <aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="chap">
+                        <span class="chap-title"></span>
+                        <ul>
+                            <li class="">
+                                <a href="adaptor.html">Adaptor</a>
+                            </li>
+                            <li class="">
+                                <a href="iterator.html">Iterator</a>
+                            </li>
+                            <li class="">
+                                <a href="template.html">Template</a>
+                            </li>
+                            <li class="">
+                                <a href="abstractFactory.html">Abstractfactory</a>
+                            </li>
+                            <li class="">
+                                <a href="bridge.html">Bridge</a>
+                            </li>
+                            <li class="">
+                                <a href="builder.html">Builder</a>
+                            </li>
+                            <li class="">
+                                <a href="chainOfResponsibility.html">Chainofresponsibility</a>
+                            </li>
+                            <li class="">
+                                <a href="Command.html">Command</a>
+                            </li>
+                            <li class="">
+                                <a href="effectiveJavaBuild.html">Effectivejavabuild</a>
+                            </li>
+                            <li class="">
+                                <a href="facade.html">Facade</a>
+                            </li>
+                            <li class="">
+                                <a href="factoryMethod.html">Factorymethod</a>
+                            </li>
+                            <li class="">
+                                <a href="flyWeight.html">Flyweight</a>
+                            </li>
+                            <li class="">
+                                <a href="Interpreter.html">Interpreter</a>
+                            </li>
+                            <li class="active">
+                                <a href="mediator.html">Mediator</a>
+                            </li>
+                            <li class="">
+                                <a href="memento.html">Memento</a>
+                            </li>
+                            <li class="">
+                                <a href="observer.html">Observer</a>
+                            </li>
+                            <li class="">
+                                <a href="prototype.html">Prototype</a>
+                            </li>
+                            <li class="">
+                                <a href="proxy.html">Proxy</a>
+                            </li>
+                            <li class="">
+                                <a href="singleton.html">Singleton</a>
+                            </li>
+                            <li class="">
+                                <a href="state.html">State</a>
+                            </li>
+                            <li class="">
+                                <a href="visitor.html">Visitor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <article class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <div class="markdown-body">
+                        <h1 id="mediator-중재자-패턴">
+                            <a href="#mediator-%EC%A4%91%EC%9E%AC%EC%9E%90-%ED%8C%A8%ED%84%B4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Mediator 중재자 패턴</h1>
+                        <ul>
+                            <li>
+                                <p>
+                                    <a href="#mediator-%EC%A4%91%EC%9E%AC%EC%9E%90-%ED%8C%A8%ED%84%B4">Mediator 중재자 패턴</a>
+                                    -
+                                    <a href="#%EC%99%9C%EC%93%B8%EA%B9%8C">왜쓸까</a>
+                                    -
+                                    <a href="#%EB%93%B1%EC%9E%A5%EC%9D%B8%EB%AC%BC">등장인물</a>
+                                    -
+                                    <a href="#%EC%98%88%EC%A0%9C-%EC%86%8C%EC%8A%A4">예제 소스</a>
+                                    -
+                                    <a href="#mediator">Mediator</a>
+                                    -
+                                    <a href="#colleague">Colleague</a>
+                                    -
+                                    <a href="#concrete-colleague">Concrete Colleague</a>
+                                    -
+                                    <a href="#concrete-mediator">Concrete Mediator</a>
+                                    -
+                                    <a href="#main">Main</a>
+                                </p>
+                                <h2 id="왜쓸까">
+                                    <a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true">
+                                        <span class="icon icon-link"></span>
+                                    </a>왜쓸까</h2>
+                            </li>
+                        </ul>
+                        <p>
+                            <img src="https://i.gyazo.com/e4d318a385cde961ad92d13298ca6fe9.gif" alt="예제">
+                        </p>
+                        <p>위와 같이 로그인 화면 등에, 이벤트마다 연계되어 각 오브젝트들이 enable disable 되는 등 연계되는 프로그램을 짠다고 가정할때, 적용하기 좋은패턴이다.</p>
+                        <p>가장 간단하게 생각이 드는건, 모든 이벤트마다 그 후 동작을 작성하는것일거다.</p>
+                        <ol>
+                            <li>
+                                <p>Guest CheckBox 클래스안에서 선택이벤트에 text field 모두 disabled, backgroundcolor 변경, Ok Button 활성화</p>
+                            </li>
+                            <li>
+                                <p>Login Checkbox 클래스안에서 선택이벤트에 id textFeild enabled, backgroundcolor 변경 등등등</p>
+                            </li>
+                            <li>
+                                <p>...</p>
+                            </li>
+                            <li>
+                                <p>...</p>
+                            </li>
+                        </ol>
+                        <p>이렇게 따로 작성하다보면, 나중에 테스트 시, 클래스를 하나하나 들여다 보며 로직을 찾아야 한다.</p>
+                        <p>이렇게 복잡하게 엮이지 않고, 중간에 중재자를 한명두고, 중재자를 믿고 이벤트를 수행하도록 작성하도록 하는 패턴이다.</p>
+                        <p>중재자에게 복잡한 로직을 위임하고 통신을 중재자를 통해서 할 때,</p>
+                        <p>자기의 본 업무에 집중 할 수 있고(loose coupling), 로직을 점검할때도 용이 할 수 있다.</p>
+                        <p>책에서 나온 장점.</p>
+                        <ol>
+                            <li>
+                                <p>분산이 화를 부를때</p>
+                                <p>Concrete Colleague 통신 기능분산이 화를 자초한다.</p>
+                            </li>
+                            <li>
+                                <p>통신 경로의 증가</p>
+                            </li>
+                        </ol>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th align="center">오브젝트</th>
+                                    <th align="center">통신 경우의 수</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td align="center">2개</td>
+                                    <td align="center">2가지</td>
+                                </tr>
+                                <tr>
+                                    <td align="center">3개</td>
+                                    <td align="center">6가지</td>
+                                </tr>
+                                <tr>
+                                    <td align="center">4개</td>
+                                    <td align="center">12가지</td>
+                                </tr>
+                                <tr>
+                                    <td align="center">5개</td>
+                                    <td align="center">20가지</td>
+                                </tr>
+                                <tr>
+                                    <td align="center">6개</td>
+                                    <td align="center">30가지</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ol>
+                            <li>ConcreteColleague 의존성이 낮아 재이용이 용이하다.(Concrete Mediator는 재이용 힘듬)</li>
+                        </ol>
+                        <h2 id="등장인물">
+                            <a href="#%EB%93%B1%EC%9E%A5%EC%9D%B8%EB%AC%BC" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>등장인물</h2>
+                        <p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Mediator_design_pattern.png" alt="클래스 다이어그램">
+                        </p>
+                        <p>Mediator(중재자) - interface 정의 / Colleague와 커뮤니케이션</p>
+                        <p>Concrete Mediator - Mediator 인터페이스를 구현하고 Colleague 오브젝트 간의 통신을 조정합니다. 상호 커뮤니 케이 션에 관해서 모든 Colleague와
+                            그 목적을 알고 있습니다.</p>
+                        <p>Colleague(동료?) - interface 정의</p>
+                        <p>Concrete Colleague - interface구현(서로 통신할 객체)</p>
+                        <h2 id="예제-소스">
+                            <a href="#%EC%98%88%EC%A0%9C-%EC%86%8C%EC%8A%A4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>예제 소스</h2>
+                        <h3 id="mediator">
+                            <a href="#mediator" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Mediator</h3>
+                        <pre><code class="language-java">    public interface Mediator {
         public abstract void createColleagues(); // colleague 구성 메소드
         public abstract void colleagueChanged(); // colleague들이 호출하는 메소드
         // 예제에선, Concrete Colleague 들이 변경되면, 위 메소드를 실행한다.
         // 이 메소드를 실행하면, enable적용 로직을 처음부터 수행한다.
     }
 </code></pre>
-<h3 id="colleague"><a href="#colleague" aria-hidden="true"><span class="icon icon-link"></span></a>Colleague</h3>
-<pre><code class="language-java">    public interface Colleague {
+                        <h3 id="colleague">
+                            <a href="#colleague" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Colleague</h3>
+                        <pre><code class="language-java">    public interface Colleague {
         public abstract void setMediator(Mediator mediator); // 중개인을 지정
         public abstract void setColleagueEnabled(boolean enabled); // 중개인이 호출 시, 각자의 Enable 처리할 메소드
     }
 </code></pre>
-<h3 id="concrete-colleague"><a href="#concrete-colleague" aria-hidden="true"><span class="icon icon-link"></span></a>Concrete Colleague</h3>
-<p>Button,CheckBox,TextField를 구현</p>
-<p>awt 구현에 관련한건 공부할 필요 x 디자인패턴만 집중해서보면</p>
-<p>private Mediator mediator;</p>
-<p>내 중개자가 누구인지 알고 있다.</p>
-<p>setColleagueEnabled(boolean enabled)</p>
-<p>true / false 가 오면, 그에 해당하는 각자의 disable enable 메소드로 적용</p>
-<p>각자 이벤트 메소드()</p>
-<p>mediator.colleagueChanged(); 를 호출해, 자신이 변경됨을 알려, 로직을 수행하도록 호출한다.</p>
-<pre><code class="language-java">    import java.awt.Button;
+                        <h3 id="concrete-colleague">
+                            <a href="#concrete-colleague" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Concrete Colleague</h3>
+                        <p>Button,CheckBox,TextField를 구현</p>
+                        <p>awt 구현에 관련한건 공부할 필요 x 디자인패턴만 집중해서보면</p>
+                        <p>private Mediator mediator;</p>
+                        <p>내 중개자가 누구인지 알고 있다.</p>
+                        <p>setColleagueEnabled(boolean enabled)</p>
+                        <p>true / false 가 오면, 그에 해당하는 각자의 disable enable 메소드로 적용</p>
+                        <p>각자 이벤트 메소드()</p>
+                        <p>mediator.colleagueChanged(); 를 호출해, 자신이 변경됨을 알려, 로직을 수행하도록 호출한다.</p>
+                        <pre><code class="language-java">    import java.awt.Button;
     import java.awt.HeadlessException;
 
     public class ColleagueButton extends Button implements Colleague {
@@ -166,7 +286,7 @@ Mediator 중재자 패턴
 
     }
 </code></pre>
-<pre><code class="language-java">    import java.awt.Checkbox;
+                        <pre><code class="language-java">    import java.awt.Checkbox;
     import java.awt.CheckboxGroup;
     import java.awt.event.ItemEvent;
     import java.awt.event.ItemListener;
@@ -195,7 +315,7 @@ Mediator 중재자 패턴
         }
     }
 </code></pre>
-<pre><code class="language-java">    import java.awt.Color;
+                        <pre><code class="language-java">    import java.awt.Color;
     import java.awt.TextField;
     import java.awt.event.TextEvent;
     import java.awt.event.TextListener;
@@ -225,9 +345,12 @@ Mediator 중재자 패턴
         }
     }
 </code></pre>
-<h3 id="concrete-mediator"><a href="#concrete-mediator" aria-hidden="true"><span class="icon icon-link"></span></a>Concrete Mediator</h3>
-<p>LoginFrame awt 프레임박스를 만들어 놓고, 로직을 중재한다.</p>
-<pre><code class="language-java">    import java.awt.CheckboxGroup;
+                        <h3 id="concrete-mediator">
+                            <a href="#concrete-mediator" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Concrete Mediator</h3>
+                        <p>LoginFrame awt 프레임박스를 만들어 놓고, 로직을 중재한다.</p>
+                        <pre><code class="language-java">    import java.awt.CheckboxGroup;
     import java.awt.Color;
     import java.awt.Frame;
     import java.awt.GridLayout;
@@ -324,14 +447,23 @@ Mediator 중재자 패턴
         }
     }
 </code></pre>
-<h3 id="main"><a href="#main" aria-hidden="true"><span class="icon icon-link"></span></a>Main</h3>
-<pre><code class="language-java">    public class Main {
+                        <h3 id="main">
+                            <a href="#main" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Main</h3>
+                        <pre><code class="language-java">    public class Main {
         public static void main(String[] args) {
             new LoginFrame("Mediator Sample"); // awt 실행됨.
         }
     }
 </code></pre>
-</div></article></section><footer>© 2017 <a>flybook</a>. All rights reserved.</footer></div></div>
-      </body>
-    </html>
-  
+                    </div>
+                </article>
+            </section>
+            <footer>© 2017
+                <a>flybook</a>. All rights reserved.</footer>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,11 +1,8 @@
-
-    <!DOCTYPE html>
-    <html>
-      <meta charset="UTF-8" />
-      <title>Visitor</title>
-      <meta
-        name="description"
-        content="Visitor 패턴
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<title>Visitor</title>
+<meta name="description" content="Visitor 패턴
 
 UML
 
@@ -15,59 +12,167 @@ Visitor 패턴의 목적은 처리를 데이터 구조에서 분리하는 일입
 
 데이터 구조는 정해져있고, Visitor의 확장은 용이합니다.
 
-예"
-      />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+예" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <link
-        href="//fonts.googleapis.com/css?family=Rubik|Unica+One"
-        rel="stylesheet"
-      />
-      <link rel="stylesheet" href=".\static/css/normalize.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/light.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
-      <style>
-        body, .markdown-body {
-          font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        }
-      </style>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-      <script src=".\static/main.js?f3c97be3b6d9ca15"></script>
-      <body>
-        <div id="root"><div class="wrap container-fluid"><header class="site-header"><h1><a href="/">flybook</a></h1><nav class="nav-link"><a href="/">Home</a><a href="https://hearimm">Git</a><a href="#" class="more"><svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg></a></nav></header><section class="row main"><aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><div class="chap"><span class="chap-title"></span><ul><li class=""><a href=".%5Cadaptor.html">Adaptor</a></li><li class=""><a href=".%5Citerator.html">Iterator</a></li><li class=""><a href=".%5Ctemplate.html">Template</a></li><li class=""><a href=".%5CabstractFactory.html">Abstractfactory</a></li><li class=""><a href=".%5Cbridge.html">Bridge</a></li><li class=""><a href=".%5Cbuilder.html">Builder</a></li><li class=""><a href=".%5CchainOfResponsibility.html">Chainofresponsibility</a></li><li class=""><a href=".%5CCommand.html">Command</a></li><li class=""><a href=".%5CeffectiveJavaBuild.html">Effectivejavabuild</a></li><li class=""><a href=".%5Cfacade.html">Facade</a></li><li class=""><a href=".%5CfactoryMethod.html">Factorymethod</a></li><li class=""><a href=".%5CflyWeight.html">Flyweight</a></li><li class=""><a href=".%5CInterpreter.html">Interpreter</a></li><li class=""><a href=".%5Cmediator.html">Mediator</a></li><li class=""><a href=".%5Cmemento.html">Memento</a></li><li class=""><a href=".%5Cobserver.html">Observer</a></li><li class=""><a href=".%5Cprototype.html">Prototype</a></li><li class=""><a href=".%5Cproxy.html">Proxy</a></li><li class=""><a href=".%5Csingleton.html">Singleton</a></li><li class=""><a href=".%5Cstate.html">State</a></li><li class="active"><a href=".%5Cvisitor.html">Visitor</a></li></ul></div></aside><article class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><div class="markdown-body"><h1 id="visitor-패턴"><a href="#visitor-%ED%8C%A8%ED%84%B4" aria-hidden="true"><span class="icon icon-link"></span></a>Visitor 패턴</h1>
-<p><img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Visitor_design_pattern.svg/500px-Visitor_design_pattern.svg.png" alt="UML"></p>
-<h2 id="왜쓸까"><a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true"><span class="icon icon-link"></span></a>왜쓸까</h2>
-<p>Visitor 패턴의 목적은 처리를 데이터 구조에서 분리하는 일입니다.</p>
-<p>데이터 구조는 정해져있고, Visitor의 확장은 용이합니다.</p>
-<p>예제의 File/Directory 처럼 한번 정해진 스펙이 크게 변경되지 않지만,</p>
-<p>접근해서 구현해야할 모양이나 방식이 제각각일때 사용하면 좋을 듯 합니다.</p>
-<p>Composite 패턴 업그레이드 &#x26; chain of respoonsibility 패턴과 반대되는 패턴으로 이해.</p>
-<h2 id="코드로-보자"><a href="#%EC%BD%94%EB%93%9C%EB%A1%9C-%EB%B3%B4%EC%9E%90" aria-hidden="true"><span class="icon icon-link"></span></a>코드로 보자</h2>
-<h3 id="visitor"><a href="#visitor" aria-hidden="true"><span class="icon icon-link"></span></a>Visitor</h3>
-<p>visit 다형성(오버로드) 파라미터를 달리해서 동일하게 사용합니다.</p>
-<pre><code class="language-java">    public abstract class Visitor {
+<link href="//fonts.googleapis.com/css?family=Rubik|Unica+One" rel="stylesheet" />
+<link rel="stylesheet" href=".\static/css/normalize.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/light.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+<style>
+    body,
+    .markdown-body {
+        font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src=".\static/main.js?cfef39a759eb9a87"></script>
+
+<body>
+    <div id="root">
+        <div class="wrap container-fluid">
+            <header class="site-header">
+                <h1>
+                    <a href="/GOF-DesignPattern/">flybook</a>
+                </h1>
+                <nav class="nav-link">
+                    <a href="/GOF-DesignPattern/">Home</a>
+                    <a href="https://hearimm.github.io/GOF-DesignPattern/">Git</a>
+                    <a href="#" class="more">
+                        <svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18">
+                            <path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </header>
+            <section class="row main">
+                <aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="chap">
+                        <span class="chap-title"></span>
+                        <ul>
+                            <li class="">
+                                <a href="adaptor.html">Adaptor</a>
+                            </li>
+                            <li class="">
+                                <a href="iterator.html">Iterator</a>
+                            </li>
+                            <li class="">
+                                <a href="template.html">Template</a>
+                            </li>
+                            <li class="">
+                                <a href="abstractFactory.html">Abstractfactory</a>
+                            </li>
+                            <li class="">
+                                <a href="bridge.html">Bridge</a>
+                            </li>
+                            <li class="">
+                                <a href="builder.html">Builder</a>
+                            </li>
+                            <li class="">
+                                <a href="chainOfResponsibility.html">Chainofresponsibility</a>
+                            </li>
+                            <li class="">
+                                <a href="Command.html">Command</a>
+                            </li>
+                            <li class="">
+                                <a href="effectiveJavaBuild.html">Effectivejavabuild</a>
+                            </li>
+                            <li class="">
+                                <a href="facade.html">Facade</a>
+                            </li>
+                            <li class="">
+                                <a href="factoryMethod.html">Factorymethod</a>
+                            </li>
+                            <li class="">
+                                <a href="flyWeight.html">Flyweight</a>
+                            </li>
+                            <li class="">
+                                <a href="Interpreter.html">Interpreter</a>
+                            </li>
+                            <li class="">
+                                <a href="mediator.html">Mediator</a>
+                            </li>
+                            <li class="">
+                                <a href="memento.html">Memento</a>
+                            </li>
+                            <li class="">
+                                <a href="observer.html">Observer</a>
+                            </li>
+                            <li class="">
+                                <a href="prototype.html">Prototype</a>
+                            </li>
+                            <li class="">
+                                <a href="proxy.html">Proxy</a>
+                            </li>
+                            <li class="">
+                                <a href="singleton.html">Singleton</a>
+                            </li>
+                            <li class="">
+                                <a href="state.html">State</a>
+                            </li>
+                            <li class="active">
+                                <a href="visitor.html">Visitor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <article class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <div class="markdown-body">
+                        <h1 id="visitor-패턴">
+                            <a href="#visitor-%ED%8C%A8%ED%84%B4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Visitor 패턴</h1>
+                        <p>
+                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Visitor_design_pattern.svg/500px-Visitor_design_pattern.svg.png"
+                                alt="UML">
+                        </p>
+                        <h2 id="왜쓸까">
+                            <a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>왜쓸까</h2>
+                        <p>Visitor 패턴의 목적은 처리를 데이터 구조에서 분리하는 일입니다.</p>
+                        <p>데이터 구조는 정해져있고, Visitor의 확장은 용이합니다.</p>
+                        <p>예제의 File/Directory 처럼 한번 정해진 스펙이 크게 변경되지 않지만,</p>
+                        <p>접근해서 구현해야할 모양이나 방식이 제각각일때 사용하면 좋을 듯 합니다.</p>
+                        <p>Composite 패턴 업그레이드 &#x26; chain of respoonsibility 패턴과 반대되는 패턴으로 이해.</p>
+                        <h2 id="코드로-보자">
+                            <a href="#%EC%BD%94%EB%93%9C%EB%A1%9C-%EB%B3%B4%EC%9E%90" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>코드로 보자</h2>
+                        <h3 id="visitor">
+                            <a href="#visitor" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Visitor</h3>
+                        <p>visit 다형성(오버로드) 파라미터를 달리해서 동일하게 사용합니다.</p>
+                        <pre><code class="language-java">    public abstract class Visitor {
         public abstract void visit(File file);
         public abstract void visit(Directory directory);
     }
 </code></pre>
-<h3 id="element"><a href="#element" aria-hidden="true"><span class="icon icon-link"></span></a>Element</h3>
-<p>Visitor를 받아들이도록 Interface 작성</p>
-<pre><code class="language-java">    public interface Element {
+                        <h3 id="element">
+                            <a href="#element" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Element</h3>
+                        <p>Visitor를 받아들이도록 Interface 작성</p>
+                        <pre><code class="language-java">    public interface Element {
         public abstract void accept(Visitor v);
     }
 </code></pre>
-<h3 id="entry"><a href="#entry" aria-hidden="true"><span class="icon icon-link"></span></a>Entry</h3>
-<p>File과 Directory가 상속할 추상클래스</p>
-<p>Template 패턴을 이용해 toString() 구현 하도록함.</p>
-<p>getSize()가 서로 다르게 동작 하지만, method를 같이 써서 한 그릇에 담을수 있다.</p>
-<p>Compoite 패턴과 다른점</p>
-<ol>
-<li>Element Interface를 구현한다는 점</li>
-<li>printList 를 작성하지 않고 Vistior가 직접 Print하도록 구현.</li>
-</ol>
-<pre><code class="language-java">    public abstract class Entry implements Element {
+                        <h3 id="entry">
+                            <a href="#entry" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Entry</h3>
+                        <p>File과 Directory가 상속할 추상클래스</p>
+                        <p>Template 패턴을 이용해 toString() 구현 하도록함.</p>
+                        <p>getSize()가 서로 다르게 동작 하지만, method를 같이 써서 한 그릇에 담을수 있다.</p>
+                        <p>Compoite 패턴과 다른점</p>
+                        <ol>
+                            <li>Element Interface를 구현한다는 점</li>
+                            <li>printList 를 작성하지 않고 Vistior가 직접 Print하도록 구현.</li>
+                        </ol>
+                        <pre><code class="language-java">    public abstract class Entry implements Element {
 
         // add Directory에만
         public Entry add(Entry entry) throws FileTreatmentException {
@@ -97,12 +202,15 @@ Visitor 패턴의 목적은 처리를 데이터 구조에서 분리하는 일입
         public abstract int getSize();
     }
 </code></pre>
-<h3 id="file"><a href="#file" aria-hidden="true"><span class="icon icon-link"></span></a>File</h3>
-<p>Composite패턴에서는 printList를 File내부에 구현해 자기 위치를 Print하도록 구현.</p>
-<p>Visitor에서는 File은 name하고 size만 가지고 있고,</p>
-<p>Vistor가 방문하도록 accept(Visitor v){ v.visit(this); } 문을 열어주면된다.</p>
-<p>자세한내용은 Visitor가 visit(File file) {} 이부분에서 구현해주면 된다.</p>
-<pre><code class="language-java">    public class File extends Entry {
+                        <h3 id="file">
+                            <a href="#file" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>File</h3>
+                        <p>Composite패턴에서는 printList를 File내부에 구현해 자기 위치를 Print하도록 구현.</p>
+                        <p>Visitor에서는 File은 name하고 size만 가지고 있고,</p>
+                        <p>Vistor가 방문하도록 accept(Visitor v){ v.visit(this); } 문을 열어주면된다.</p>
+                        <p>자세한내용은 Visitor가 visit(File file) {} 이부분에서 구현해주면 된다.</p>
+                        <pre><code class="language-java">    public class File extends Entry {
 
         private String name;
         private int size;
@@ -133,15 +241,18 @@ Visitor 패턴의 목적은 처리를 데이터 구조에서 분리하는 일입
         //  }
     }
 </code></pre>
-<h3 id="directory"><a href="#directory" aria-hidden="true"><span class="icon icon-link"></span></a>Directory</h3>
-<p>File과 마찬가지로, Composite패턴에서는</p>
-<p>printList를 구현해 Directory 내부를 재귀적으로 호출하도록 구현했지만,</p>
-<p>Visitor에서는 구조와 처리를 분리한다.</p>
-<p>Visitor에서는 Directory는 name하고 EntryList를 가지고 있고,</p>
-<p>(Entry ArrayList는 Directory.add(new File())로 받을때 가지고 있다가 size구할때 loop를 돌며 구한다.)</p>
-<p>Vistor가 방문하도록 accept(Visitor v){ v.visit(this); } 문을 열어주면된다.</p>
-<p>자세한내용은 Visitor가 visit(Directory dir) {} 이부분에서 구현해주면 된다.</p>
-<pre><code class="language-java">    public class Directory extends Entry {
+                        <h3 id="directory">
+                            <a href="#directory" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Directory</h3>
+                        <p>File과 마찬가지로, Composite패턴에서는</p>
+                        <p>printList를 구현해 Directory 내부를 재귀적으로 호출하도록 구현했지만,</p>
+                        <p>Visitor에서는 구조와 처리를 분리한다.</p>
+                        <p>Visitor에서는 Directory는 name하고 EntryList를 가지고 있고,</p>
+                        <p>(Entry ArrayList는 Directory.add(new File())로 받을때 가지고 있다가 size구할때 loop를 돌며 구한다.)</p>
+                        <p>Vistor가 방문하도록 accept(Visitor v){ v.visit(this); } 문을 열어주면된다.</p>
+                        <p>자세한내용은 Visitor가 visit(Directory dir) {} 이부분에서 구현해주면 된다.</p>
+                        <pre><code class="language-java">    public class Directory extends Entry {
         private String name;
         private ArrayList&#x3C;Entry> dir = new ArrayList&#x3C;Entry>(); // 안에 담길 Entry List
 
@@ -193,11 +304,14 @@ Visitor 패턴의 목적은 처리를 데이터 구조에서 분리하는 일입
 
     }
 </code></pre>
-<h3 id="listvisitor"><a href="#listvisitor" aria-hidden="true"><span class="icon icon-link"></span></a>ListVisitor</h3>
-<p>File과 Directory에 접근할때, 구현을 작성해준다.</p>
-<p>필요하면 다른 Visitor 를 만들어서 다른 방식으로 표현할 수 있도록 확장이 용이하다.</p>
-<p>(ex: full path 조회용 , size(byte -> MB), size(byte -> GB) 등등)</p>
-<pre><code class="language-java">    public class ListVisitor extends Visitor {
+                        <h3 id="listvisitor">
+                            <a href="#listvisitor" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>ListVisitor</h3>
+                        <p>File과 Directory에 접근할때, 구현을 작성해준다.</p>
+                        <p>필요하면 다른 Visitor 를 만들어서 다른 방식으로 표현할 수 있도록 확장이 용이하다.</p>
+                        <p>(ex: full path 조회용 , size(byte -> MB), size(byte -> GB) 등등)</p>
+                        <pre><code class="language-java">    public class ListVisitor extends Visitor {
         private String currentDir = "";
 
         @Override
@@ -219,9 +333,12 @@ Visitor 패턴의 목적은 처리를 데이터 구조에서 분리하는 일입
         }
     }
 </code></pre>
-<h3 id="exception"><a href="#exception" aria-hidden="true"><span class="icon icon-link"></span></a>Exception</h3>
-<p>그냥 구현용..;</p>
-<pre><code class="language-java">    public class FileTreatmentException extends RuntimeException {
+                        <h3 id="exception">
+                            <a href="#exception" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Exception</h3>
+                        <p>그냥 구현용..;</p>
+                        <pre><code class="language-java">    public class FileTreatmentException extends RuntimeException {
 
         private static final long serialVersionUID = -5703043221169701552L;
 
@@ -233,49 +350,52 @@ Visitor 패턴의 목적은 처리를 데이터 구조에서 분리하는 일입
         }
     }
 </code></pre>
-<h3 id="main"><a href="#main" aria-hidden="true"><span class="icon icon-link"></span></a>Main</h3>
-<p>폴더 Tree</p>
-<ul>
-<li>
-<p>root</p>
-<ul>
-<li>
-<p>bin</p>
-<ul>
-<li>vi(file)</li>
-<li>latex (file)</li>
-</ul>
-</li>
-<li>tmp</li>
-<li>
-<p>usr</p>
-<ul>
-<li>
-<p>Kim</p>
-<ul>
-<li>diary.html</li>
-<li>Composite.java</li>
-</ul>
-</li>
-<li>
-<p>Lee</p>
-<ul>
-<li>memo.txt</li>
-</ul>
-</li>
-<li>
-<p>Park</p>
-<ul>
-<li>game.doc</li>
-<li>junk.mail</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code class="language-java">    public class Main {
+                        <h3 id="main">
+                            <a href="#main" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Main</h3>
+                        <p>폴더 Tree</p>
+                        <ul>
+                            <li>
+                                <p>root</p>
+                                <ul>
+                                    <li>
+                                        <p>bin</p>
+                                        <ul>
+                                            <li>vi(file)</li>
+                                            <li>latex (file)</li>
+                                        </ul>
+                                    </li>
+                                    <li>tmp</li>
+                                    <li>
+                                        <p>usr</p>
+                                        <ul>
+                                            <li>
+                                                <p>Kim</p>
+                                                <ul>
+                                                    <li>diary.html</li>
+                                                    <li>Composite.java</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <p>Lee</p>
+                                                <ul>
+                                                    <li>memo.txt</li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <p>Park</p>
+                                                <ul>
+                                                    <li>game.doc</li>
+                                                    <li>junk.mail</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <pre><code class="language-java">    public class Main {
 
         public static void main(String[] args) {
             System.out.println("Making root entries...");
@@ -315,8 +435,11 @@ Visitor 패턴의 목적은 처리를 데이터 구조에서 분리하는 일입
 
     }
 </code></pre>
-<h3 id="결과"><a href="#%EA%B2%B0%EA%B3%BC" aria-hidden="true"><span class="icon icon-link"></span></a>결과</h3>
-<pre><code class="language-결과">Making root entries...
+                        <h3 id="결과">
+                            <a href="#%EA%B2%B0%EA%B3%BC" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>결과</h3>
+                        <pre><code class="language-결과">Making root entries...
 /root (30000)
 /root/bin (30000)
 /root/bin/vi (10000)
@@ -340,58 +463,107 @@ Making user entires...
 /root/usr/Park/game.doc (400)
 /root/usr/Park/junk.mail (500)
 </code></pre>
-<h2 id="visitor패턴-등장인물"><a href="#visitor%ED%8C%A8%ED%84%B4-%EB%93%B1%EC%9E%A5%EC%9D%B8%EB%AC%BC" aria-hidden="true"><span class="icon icon-link"></span></a>Visitor패턴 등장인물</h2>
-<h3 id="visitor방문자"><a href="#visitor%EB%B0%A9%EB%AC%B8%EC%9E%90" aria-hidden="true"><span class="icon icon-link"></span></a>Visitor(방문자)</h3>
-<p>Visitor는 데이터 구조의 요소(ConcreteElement: File/Directory) 마다</p>
-<p>visit 메소드를 선언합니다.</p>
-<p>예제 : Visitor클래스</p>
-<h3 id="concretevisitor구체적-방문자"><a href="#concretevisitor%EA%B5%AC%EC%B2%B4%EC%A0%81-%EB%B0%A9%EB%AC%B8%EC%9E%90" aria-hidden="true"><span class="icon icon-link"></span></a>ConcreteVisitor(구체적 방문자)</h3>
-<p>Visitor의 메소드를 구현합니다.</p>
-<p>currentDir 필드가 변화했듯이, visit을 처리중에 내부상태가 변하기도 합니다.</p>
-<p>예제 : ListVisitor 클래스</p>
-<h3 id="element요소"><a href="#element%EC%9A%94%EC%86%8C" aria-hidden="true"><span class="icon icon-link"></span></a>Element(요소)</h3>
-<p>Visitor가 방문할 곳을 나타내는 역할.</p>
-<p>accept(Visitor v)를 선언합니다.</p>
-<p>예제 : Element</p>
-<h3 id="concreteelement구체적-요소"><a href="#concreteelement%EA%B5%AC%EC%B2%B4%EC%A0%81-%EC%9A%94%EC%86%8C" aria-hidden="true"><span class="icon icon-link"></span></a>ConcreteElement(구체적 요소)</h3>
-<p>예제 : File/Directory</p>
-<h3 id="objectstructure오브젝트-구조"><a href="#objectstructure%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%A1%B0" aria-hidden="true"><span class="icon icon-link"></span></a>ObjectStructure(오브젝트 구조)</h3>
-<p>Element역할의 집합을 취급하는 역할을합니다.
-ConcreteVisitor가 각각 Element에 접근할 수 있도록 구비하는 역할</p>
-<p>예제에선 Directory클래스가 iterator를 준비해서 이 역할을 같이 맡고 있습니다.</p>
-<h2 id="알아두면-쓸만한-잡다한-지식사전"><a href="#%EC%95%8C%EC%95%84%EB%91%90%EB%A9%B4-%EC%93%B8%EB%A7%8C%ED%95%9C-%EC%9E%A1%EB%8B%A4%ED%95%9C-%EC%A7%80%EC%8B%9D%EC%82%AC%EC%A0%84" aria-hidden="true"><span class="icon icon-link"></span></a>알아두면 쓸만한 잡다한 지식사전</h2>
-<h3 id="더블-디스패치이중분리"><a href="#%EB%8D%94%EB%B8%94-%EB%94%94%EC%8A%A4%ED%8C%A8%EC%B9%98%EC%9D%B4%EC%A4%91%EB%B6%84%EB%A6%AC" aria-hidden="true"><span class="icon icon-link"></span></a>더블 디스패치(이중분리)</h3>
-<pre><code class="language-java">Element.accept(Visitor v)
+                        <h2 id="visitor패턴-등장인물">
+                            <a href="#visitor%ED%8C%A8%ED%84%B4-%EB%93%B1%EC%9E%A5%EC%9D%B8%EB%AC%BC" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Visitor패턴 등장인물</h2>
+                        <h3 id="visitor방문자">
+                            <a href="#visitor%EB%B0%A9%EB%AC%B8%EC%9E%90" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Visitor(방문자)</h3>
+                        <p>Visitor는 데이터 구조의 요소(ConcreteElement: File/Directory) 마다</p>
+                        <p>visit 메소드를 선언합니다.</p>
+                        <p>예제 : Visitor클래스</p>
+                        <h3 id="concretevisitor구체적-방문자">
+                            <a href="#concretevisitor%EA%B5%AC%EC%B2%B4%EC%A0%81-%EB%B0%A9%EB%AC%B8%EC%9E%90" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>ConcreteVisitor(구체적 방문자)</h3>
+                        <p>Visitor의 메소드를 구현합니다.</p>
+                        <p>currentDir 필드가 변화했듯이, visit을 처리중에 내부상태가 변하기도 합니다.</p>
+                        <p>예제 : ListVisitor 클래스</p>
+                        <h3 id="element요소">
+                            <a href="#element%EC%9A%94%EC%86%8C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Element(요소)</h3>
+                        <p>Visitor가 방문할 곳을 나타내는 역할.</p>
+                        <p>accept(Visitor v)를 선언합니다.</p>
+                        <p>예제 : Element</p>
+                        <h3 id="concreteelement구체적-요소">
+                            <a href="#concreteelement%EA%B5%AC%EC%B2%B4%EC%A0%81-%EC%9A%94%EC%86%8C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>ConcreteElement(구체적 요소)</h3>
+                        <p>예제 : File/Directory</p>
+                        <h3 id="objectstructure오브젝트-구조">
+                            <a href="#objectstructure%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%A1%B0" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>ObjectStructure(오브젝트 구조)</h3>
+                        <p>Element역할의 집합을 취급하는 역할을합니다. ConcreteVisitor가 각각 Element에 접근할 수 있도록 구비하는 역할</p>
+                        <p>예제에선 Directory클래스가 iterator를 준비해서 이 역할을 같이 맡고 있습니다.</p>
+                        <h2 id="알아두면-쓸만한-잡다한-지식사전">
+                            <a href="#%EC%95%8C%EC%95%84%EB%91%90%EB%A9%B4-%EC%93%B8%EB%A7%8C%ED%95%9C-%EC%9E%A1%EB%8B%A4%ED%95%9C-%EC%A7%80%EC%8B%9D%EC%82%AC%EC%A0%84"
+                                aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>알아두면 쓸만한 잡다한 지식사전</h2>
+                        <h3 id="더블-디스패치이중분리">
+                            <a href="#%EB%8D%94%EB%B8%94-%EB%94%94%EC%8A%A4%ED%8C%A8%EC%B9%98%EC%9D%B4%EC%A4%91%EB%B6%84%EB%A6%AC" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>더블 디스패치(이중분리)</h3>
+                        <pre><code class="language-java">Element.accept(Visitor v)
 Visitor.visit(Element e)
 </code></pre>
-<p>서로 호출함으로써 재귀처럼 사용.</p>
-<h3 id="the-open-closed-principleocp"><a href="#the-open-closed-principleocp" aria-hidden="true"><span class="icon icon-link"></span></a>The Open-Closed Principle(OCP)</h3>
-<p>Bertrand Meyer가 제시한 것으로 Robert C.Martin이 C++ Report(Jan. 1996)에 쓴 Engineering Notebook 이라는 컬럼에 정리되어 있습니다.</p>
-<p><a href="https://www.cs.duke.edu/courses/fall07/cps108/papers/ocp.pdf">https://www.cs.duke.edu/courses/fall07/cps108/papers/ocp.pdf</a></p>
-<p><a href="http://stg-tud.github.io/sedc/Lecture/ss15/3.3-OCP.pdf">http://stg-tud.github.io/sedc/Lecture/ss15/3.3-OCP.pdf</a></p>
-<p><a href="https://ko.wikipedia.org/wiki/%EA%B0%9C%EB%B0%A9-%ED%8F%90%EC%87%84_%EC%9B%90%EC%B9%99">https://ko.wikipedia.org/wiki/%EA%B0%9C%EB%B0%A9-%ED%8F%90%EC%87%84_%EC%9B%90%EC%B9%99</a></p>
-<p>기존의 클래스를 수정하지 않고 확장할 수 있도록 하는 것이 원칙!</p>
-<p>확장은 열려 있고, 수정은 닫혀있다!
-클래스를 설계할때 특별한이유가 없는 한 확장을 허용해야 합니다.
-이유없이 확장을 금지해서는 안되며, 이것이 '확장에 대해서는 열려있다' 는 의미입니다.</p>
-<p>그러나 확장을 할 때마다 기존의 클래스를 수정해야 하는 것도 곤란합니다.
-확장을 해도 기존의 클래스는 수정할 필요가 없는 것이 '수정에 대해서는 닫혀있다'라는 의미입니다.</p>
-<h3 id="concretevisitor-역할의-추가는-간단하다"><a href="#concretevisitor-%EC%97%AD%ED%95%A0%EC%9D%98-%EC%B6%94%EA%B0%80%EB%8A%94-%EA%B0%84%EB%8B%A8%ED%95%98%EB%8B%A4" aria-hidden="true"><span class="icon icon-link"></span></a>ConcreteVisitor 역할의 추가는 간단하다</h3>
-<p>ListVisitor를 수정해서, 추가하면 쉽게 추가가 가능합니다.</p>
-<p>(ex: full path 조회용 , size(byte -> MB), size(byte -> GB) 등등)</p>
-<h3 id="concreteelement-역할의-추가는-곤란하다"><a href="#concreteelement-%EC%97%AD%ED%95%A0%EC%9D%98-%EC%B6%94%EA%B0%80%EB%8A%94-%EA%B3%A4%EB%9E%80%ED%95%98%EB%8B%A4" aria-hidden="true"><span class="icon icon-link"></span></a>ConcreteElement 역할의 추가는 곤란하다</h3>
-<p>ConcreteVisitor역할의 추가는 간단하지만,</p>
-<p>Entry에 새로운 a 클래스가 생기면 Visitor에 visit(A a); 를 추가하고</p>
-<p>각 ConcreteVisitor마다 구현을 작성해야 합니다.</p>
-<h3 id="visitor가-처리하기-위해서-무엇이-필요한가"><a href="#visitor%EA%B0%80-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%B4%EC%84%9C-%EB%AC%B4%EC%97%87%EC%9D%B4-%ED%95%84%EC%9A%94%ED%95%9C%EA%B0%80" aria-hidden="true"><span class="icon icon-link"></span></a>Visitor가 처리하기 위해서 무엇이 필요한가</h3>
-<p>데이터 구조의 요소에 대한 처리를 따로 분리해서 Visitor역할에게 맡깁니다.</p>
-<p>이렇게 해서 데이터구조와 요소에 대한 처리를 분리할 수 있습니다.</p>
-<p>이것은 그럴듯한 말이지만 Element 역할은 Visitor 역할에 대해서 충분한 정보를 공개할 필요가 있습니다.</p>
-<p>예제에선 iterator 메소드를 제공할 필요가 있었습니다.</p>
-<p>방문자는 데이터구조에 서 필요한 정보를 취득해서 동작합니다.</p>
-<p>필요한 정보를 얻을 수 없으면 방문자는 제대로 일할 수 없습니다.</p>
-<p>반면에 공개할 필요 없는 정보까지 공개하면, 미래의 데이터 구조를 개량하기 어렵게 됩니다.</p>
-</div></article></section><footer>© 2017 <a>flybook</a>. All rights reserved.</footer></div></div>
-      </body>
-    </html>
-  
+                        <p>서로 호출함으로써 재귀처럼 사용.</p>
+                        <h3 id="the-open-closed-principleocp">
+                            <a href="#the-open-closed-principleocp" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>The Open-Closed Principle(OCP)</h3>
+                        <p>Bertrand Meyer가 제시한 것으로 Robert C.Martin이 C++ Report(Jan. 1996)에 쓴 Engineering Notebook 이라는 컬럼에 정리되어
+                            있습니다.
+                        </p>
+                        <p>
+                            <a href="https://www.cs.duke.edu/courses/fall07/cps108/papers/ocp.pdf">https://www.cs.duke.edu/courses/fall07/cps108/papers/ocp.pdf</a>
+                        </p>
+                        <p>
+                            <a href="http://stg-tud.github.io/sedc/Lecture/ss15/3.3-OCP.pdf">http://stg-tud.github.io/sedc/Lecture/ss15/3.3-OCP.pdf</a>
+                        </p>
+                        <p>
+                            <a href="https://ko.wikipedia.org/wiki/%EA%B0%9C%EB%B0%A9-%ED%8F%90%EC%87%84_%EC%9B%90%EC%B9%99">https://ko.wikipedia.org/wiki/%EA%B0%9C%EB%B0%A9-%ED%8F%90%EC%87%84_%EC%9B%90%EC%B9%99</a>
+                        </p>
+                        <p>기존의 클래스를 수정하지 않고 확장할 수 있도록 하는 것이 원칙!</p>
+                        <p>확장은 열려 있고, 수정은 닫혀있다! 클래스를 설계할때 특별한이유가 없는 한 확장을 허용해야 합니다. 이유없이 확장을 금지해서는 안되며, 이것이 '확장에 대해서는 열려있다'
+                            는 의미입니다.</p>
+                        <p>그러나 확장을 할 때마다 기존의 클래스를 수정해야 하는 것도 곤란합니다. 확장을 해도 기존의 클래스는 수정할 필요가 없는 것이 '수정에 대해서는 닫혀있다'라는 의미입니다.</p>
+                        <h3 id="concretevisitor-역할의-추가는-간단하다">
+                            <a href="#concretevisitor-%EC%97%AD%ED%95%A0%EC%9D%98-%EC%B6%94%EA%B0%80%EB%8A%94-%EA%B0%84%EB%8B%A8%ED%95%98%EB%8B%A4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>ConcreteVisitor 역할의 추가는 간단하다</h3>
+                        <p>ListVisitor를 수정해서, 추가하면 쉽게 추가가 가능합니다.</p>
+                        <p>(ex: full path 조회용 , size(byte -> MB), size(byte -> GB) 등등)</p>
+                        <h3 id="concreteelement-역할의-추가는-곤란하다">
+                            <a href="#concreteelement-%EC%97%AD%ED%95%A0%EC%9D%98-%EC%B6%94%EA%B0%80%EB%8A%94-%EA%B3%A4%EB%9E%80%ED%95%98%EB%8B%A4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>ConcreteElement 역할의 추가는 곤란하다</h3>
+                        <p>ConcreteVisitor역할의 추가는 간단하지만,</p>
+                        <p>Entry에 새로운 a 클래스가 생기면 Visitor에 visit(A a); 를 추가하고</p>
+                        <p>각 ConcreteVisitor마다 구현을 작성해야 합니다.</p>
+                        <h3 id="visitor가-처리하기-위해서-무엇이-필요한가">
+                            <a href="#visitor%EA%B0%80-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%B4%EC%84%9C-%EB%AC%B4%EC%97%87%EC%9D%B4-%ED%95%84%EC%9A%94%ED%95%9C%EA%B0%80"
+                                aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Visitor가 처리하기 위해서 무엇이 필요한가</h3>
+                        <p>데이터 구조의 요소에 대한 처리를 따로 분리해서 Visitor역할에게 맡깁니다.</p>
+                        <p>이렇게 해서 데이터구조와 요소에 대한 처리를 분리할 수 있습니다.</p>
+                        <p>이것은 그럴듯한 말이지만 Element 역할은 Visitor 역할에 대해서 충분한 정보를 공개할 필요가 있습니다.</p>
+                        <p>예제에선 iterator 메소드를 제공할 필요가 있었습니다.</p>
+                        <p>방문자는 데이터구조에 서 필요한 정보를 취득해서 동작합니다.</p>
+                        <p>필요한 정보를 얻을 수 없으면 방문자는 제대로 일할 수 없습니다.</p>
+                        <p>반면에 공개할 필요 없는 정보까지 공개하면, 미래의 데이터 구조를 개량하기 어렵게 됩니다.</p>
+                    </div>
+                </article>
+            </section>
+            <footer>© 2017
+                <a>flybook</a>. All rights reserved.</footer>
+        </div>
+    </div>
+</body>
+
+</html>

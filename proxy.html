@@ -1,11 +1,8 @@
-
-    <!DOCTYPE html>
-    <html>
-      <meta charset="UTF-8" />
-      <title>Proxy</title>
-      <meta
-        name="description"
-        content="Proxy 패턴
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<title>Proxy</title>
+<meta name="description" content="Proxy 패턴
 
 왜쓸까
 
@@ -19,67 +16,166 @@ Lazy다 Lazy!
 
 
 
-Printer.java "
-      />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+Printer.java " />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <link
-        href="//fonts.googleapis.com/css?family=Rubik|Unica+One"
-        rel="stylesheet"
-      />
-      <link rel="stylesheet" href=".\static/css/normalize.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href=".\static/css/light.css?f3c97be3b6d9ca15" />
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
-      <style>
-        body, .markdown-body {
-          font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        }
-      </style>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-      <script src=".\static/main.js?f3c97be3b6d9ca15"></script>
-      <body>
-        <div id="root"><div class="wrap container-fluid"><header class="site-header"><h1><a href="/">flybook</a></h1><nav class="nav-link"><a href="/">Home</a><a href="https://hearimm">Git</a><a href="#" class="more"><svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg></a></nav></header><section class="row main"><aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><div class="chap"><span class="chap-title"></span><ul><li class=""><a href=".%5Cadaptor.html">Adaptor</a></li><li class=""><a href=".%5Citerator.html">Iterator</a></li><li class=""><a href=".%5Ctemplate.html">Template</a></li><li class=""><a href=".%5CabstractFactory.html">Abstractfactory</a></li><li class=""><a href=".%5Cbridge.html">Bridge</a></li><li class=""><a href=".%5Cbuilder.html">Builder</a></li><li class=""><a href=".%5CchainOfResponsibility.html">Chainofresponsibility</a></li><li class=""><a href=".%5CCommand.html">Command</a></li><li class=""><a href=".%5CeffectiveJavaBuild.html">Effectivejavabuild</a></li><li class=""><a href=".%5Cfacade.html">Facade</a></li><li class=""><a href=".%5CfactoryMethod.html">Factorymethod</a></li><li class=""><a href=".%5CflyWeight.html">Flyweight</a></li><li class=""><a href=".%5CInterpreter.html">Interpreter</a></li><li class=""><a href=".%5Cmediator.html">Mediator</a></li><li class=""><a href=".%5Cmemento.html">Memento</a></li><li class=""><a href=".%5Cobserver.html">Observer</a></li><li class=""><a href=".%5Cprototype.html">Prototype</a></li><li class="active"><a href=".%5Cproxy.html">Proxy</a></li><li class=""><a href=".%5Csingleton.html">Singleton</a></li><li class=""><a href=".%5Cstate.html">State</a></li><li class=""><a href=".%5Cvisitor.html">Visitor</a></li></ul></div></aside><article class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><div class="markdown-body"><h1 id="proxy-패턴"><a href="#proxy-%ED%8C%A8%ED%84%B4" aria-hidden="true"><span class="icon icon-link"></span></a>Proxy 패턴</h1>
-<h2 id="왜쓸까"><a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true"><span class="icon icon-link"></span></a>왜쓸까</h2>
-<p>프록시는 대리인이라는 의미입니다.</p>
-<p>대리인이란 일을 해야할 본인을 대리인이 대신 해주는 것.</p>
-<p>Lazy다 Lazy!</p>
-<h2 id="예제"><a href="#%EC%98%88%EC%A0%9C" aria-hidden="true"><span class="icon icon-link"></span></a>예제</h2>
-<table>
-<thead>
-<tr>
-<th>역할</th>
-<th>예제</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Subject</td>
-<td>Printable(Interface)</td>
-<td>Proxy와 RealSubject가 동일시 되도록 Interface작성</td>
-</tr>
-<tr>
-<td>Proxy</td>
-<td>PrinterProxy</td>
-<td>대리인의 역할</td>
-</tr>
-<tr>
-<td>RealSubject</td>
-<td>Printer</td>
-<td>실제 주체의 역할</td>
-</tr>
-<tr>
-<td>Client</td>
-<td>Main</td>
-<td>GoF책에서는 없는 역할입니다.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="printerjava-realsubject"><a href="#printerjava-realsubject" aria-hidden="true"><span class="icon icon-link"></span></a>Printer.java (RealSubject)</h3>
-<p>실제 주체는 생성할때 오래걸린다.</p>
-<pre><code class="language-java">    public class Printer implements Printable {
+<link href="//fonts.googleapis.com/css?family=Rubik|Unica+One" rel="stylesheet" />
+<link rel="stylesheet" href=".\static/css/normalize.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href=".\static/css/light.css?cfef39a759eb9a87" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+<style>
+    body,
+    .markdown-body {
+        font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src=".\static/main.js?cfef39a759eb9a87"></script>
+
+<body>
+    <div id="root">
+        <div class="wrap container-fluid">
+            <header class="site-header">
+                <h1>
+                    <a href="/GOF-DesignPattern/">flybook</a>
+                </h1>
+                <nav class="nav-link">
+                    <a href="/GOF-DesignPattern/">Home</a>
+                    <a href="https://hearimm.github.io/GOF-DesignPattern/">Git</a>
+                    <a href="#" class="more">
+                        <svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18">
+                            <path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </header>
+            <section class="row main">
+                <aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="chap">
+                        <span class="chap-title"></span>
+                        <ul>
+                            <li class="">
+                                <a href="adaptor.html">Adaptor</a>
+                            </li>
+                            <li class="">
+                                <a href="iterator.html">Iterator</a>
+                            </li>
+                            <li class="">
+                                <a href="template.html">Template</a>
+                            </li>
+                            <li class="">
+                                <a href="abstractFactory.html">Abstractfactory</a>
+                            </li>
+                            <li class="">
+                                <a href="bridge.html">Bridge</a>
+                            </li>
+                            <li class="">
+                                <a href="builder.html">Builder</a>
+                            </li>
+                            <li class="">
+                                <a href="chainOfResponsibility.html">Chainofresponsibility</a>
+                            </li>
+                            <li class="">
+                                <a href="Command.html">Command</a>
+                            </li>
+                            <li class="">
+                                <a href="effectiveJavaBuild.html">Effectivejavabuild</a>
+                            </li>
+                            <li class="">
+                                <a href="facade.html">Facade</a>
+                            </li>
+                            <li class="">
+                                <a href="factoryMethod.html">Factorymethod</a>
+                            </li>
+                            <li class="">
+                                <a href="flyWeight.html">Flyweight</a>
+                            </li>
+                            <li class="">
+                                <a href="Interpreter.html">Interpreter</a>
+                            </li>
+                            <li class="">
+                                <a href="mediator.html">Mediator</a>
+                            </li>
+                            <li class="">
+                                <a href="memento.html">Memento</a>
+                            </li>
+                            <li class="">
+                                <a href="observer.html">Observer</a>
+                            </li>
+                            <li class="">
+                                <a href="prototype.html">Prototype</a>
+                            </li>
+                            <li class="active">
+                                <a href="proxy.html">Proxy</a>
+                            </li>
+                            <li class="">
+                                <a href="singleton.html">Singleton</a>
+                            </li>
+                            <li class="">
+                                <a href="state.html">State</a>
+                            </li>
+                            <li class="">
+                                <a href="visitor.html">Visitor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+                <article class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <div class="markdown-body">
+                        <h1 id="proxy-패턴">
+                            <a href="#proxy-%ED%8C%A8%ED%84%B4" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Proxy 패턴</h1>
+                        <h2 id="왜쓸까">
+                            <a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>왜쓸까</h2>
+                        <p>프록시는 대리인이라는 의미입니다.</p>
+                        <p>대리인이란 일을 해야할 본인을 대리인이 대신 해주는 것.</p>
+                        <p>Lazy다 Lazy!</p>
+                        <h2 id="예제">
+                            <a href="#%EC%98%88%EC%A0%9C" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>예제</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>역할</th>
+                                    <th>예제</th>
+                                    <th>설명</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Subject</td>
+                                    <td>Printable(Interface)</td>
+                                    <td>Proxy와 RealSubject가 동일시 되도록 Interface작성</td>
+                                </tr>
+                                <tr>
+                                    <td>Proxy</td>
+                                    <td>PrinterProxy</td>
+                                    <td>대리인의 역할</td>
+                                </tr>
+                                <tr>
+                                    <td>RealSubject</td>
+                                    <td>Printer</td>
+                                    <td>실제 주체의 역할</td>
+                                </tr>
+                                <tr>
+                                    <td>Client</td>
+                                    <td>Main</td>
+                                    <td>GoF책에서는 없는 역할입니다.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 id="printerjava-realsubject">
+                            <a href="#printerjava-realsubject" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Printer.java (RealSubject)</h3>
+                        <p>실제 주체는 생성할때 오래걸린다.</p>
+                        <pre><code class="language-java">    public class Printer implements Printable {
         private String name;
 
         public Printer() {
@@ -125,16 +221,22 @@ Printer.java "
 
     }
 </code></pre>
-<h3 id="printablejava-subject"><a href="#printablejava-subject" aria-hidden="true"><span class="icon icon-link"></span></a>Printable.java (Subject)</h3>
-<p>실체에서 Proxy와 공유할 메소드를 interface에 정의함.</p>
-<pre><code class="language-java">    public interface Printable {
+                        <h3 id="printablejava-subject">
+                            <a href="#printablejava-subject" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>Printable.java (Subject)</h3>
+                        <p>실체에서 Proxy와 공유할 메소드를 interface에 정의함.</p>
+                        <pre><code class="language-java">    public interface Printable {
         public abstract void setPrinterName(String name);
         public abstract String getPrinterName();
         public abstract void print(String string);
     }
 </code></pre>
-<h3 id="printproxyjava-proxy"><a href="#printproxyjava-proxy" aria-hidden="true"><span class="icon icon-link"></span></a>PrintProxy.java (Proxy)</h3>
-<pre><code class="language-java">    public class PrinterProxy implements Printable {
+                        <h3 id="printproxyjava-proxy">
+                            <a href="#printproxyjava-proxy" aria-hidden="true">
+                                <span class="icon icon-link"></span>
+                            </a>PrintProxy.java (Proxy)</h3>
+                        <pre><code class="language-java">    public class PrinterProxy implements Printable {
 
         private String name; // 이름
         private Printer real; // 본인
@@ -170,7 +272,13 @@ Printer.java "
 
     }
 </code></pre>
-</div></article></section><footer>© 2017 <a>flybook</a>. All rights reserved.</footer></div></div>
-      </body>
-    </html>
-  
+                    </div>
+                </article>
+            </section>
+            <footer>© 2017
+                <a>flybook</a>. All rights reserved.</footer>
+        </div>
+    </div>
+</body>
+
+</html>
