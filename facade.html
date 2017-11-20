@@ -1,0 +1,121 @@
+
+    <!DOCTYPE html>
+    <html>
+      <meta charset="UTF-8" />
+      <title>Facade</title>
+      <meta
+        name="description"
+        content="Facade 패턴
+
+이 패턴만 4년내내 써와서... 책을 훑어보고 이해한 유일한 패턴...
+
+어쨋든 facade라는 의미는 불어로 건물의 정면이라는 의미라고 합니다.
+
+책에서는 창"
+      />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <link
+        href="//fonts.googleapis.com/css?family=Rubik|Unica+One"
+        rel="stylesheet"
+      />
+      <link rel="stylesheet" href=".\static/css/normalize.css?f3c97be3b6d9ca15" />
+      <link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?f3c97be3b6d9ca15" />
+      <link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?f3c97be3b6d9ca15" />
+      <link rel="stylesheet" href=".\static/css/light.css?f3c97be3b6d9ca15" />
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+      <style>
+        body, .markdown-body {
+          font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+      </style>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src=".\static/main.js?f3c97be3b6d9ca15"></script>
+      <body>
+        <div id="root"><div class="wrap container-fluid"><header class="site-header"><h1><a href="/">flybook</a></h1><nav class="nav-link"><a href="/">Home</a><a href="https://hearimm">Git</a><a href="#" class="more"><svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg></a></nav></header><section class="row main"><aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><div class="chap"><span class="chap-title"></span><ul><li class=""><a href=".%5Cadaptor.html">Adaptor</a></li><li class=""><a href=".%5Citerator.html">Iterator</a></li><li class=""><a href=".%5Ctemplate.html">Template</a></li><li class=""><a href=".%5CabstractFactory.html">Abstractfactory</a></li><li class=""><a href=".%5Cbridge.html">Bridge</a></li><li class=""><a href=".%5Cbuilder.html">Builder</a></li><li class=""><a href=".%5CchainOfResponsibility.html">Chainofresponsibility</a></li><li class=""><a href=".%5CCommand.html">Command</a></li><li class=""><a href=".%5CeffectiveJavaBuild.html">Effectivejavabuild</a></li><li class="active"><a href=".%5Cfacade.html">Facade</a></li><li class=""><a href=".%5CfactoryMethod.html">Factorymethod</a></li><li class=""><a href=".%5CflyWeight.html">Flyweight</a></li><li class=""><a href=".%5CInterpreter.html">Interpreter</a></li><li class=""><a href=".%5Cmediator.html">Mediator</a></li><li class=""><a href=".%5Cmemento.html">Memento</a></li><li class=""><a href=".%5Cobserver.html">Observer</a></li><li class=""><a href=".%5Cprototype.html">Prototype</a></li><li class=""><a href=".%5Cproxy.html">Proxy</a></li><li class=""><a href=".%5Csingleton.html">Singleton</a></li><li class=""><a href=".%5Cstate.html">State</a></li><li class=""><a href=".%5Cvisitor.html">Visitor</a></li></ul></div></aside><article class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><div class="markdown-body"><h1 id="facade-패턴"><a href="#facade-%ED%8C%A8%ED%84%B4" aria-hidden="true"><span class="icon icon-link"></span></a>Facade 패턴</h1>
+<p>이 패턴만 4년내내 써와서... 책을 훑어보고 이해한 유일한 패턴...</p>
+<p>어쨋든 facade라는 의미는 불어로 건물의 정면이라는 의미라고 합니다.</p>
+<p>책에서는 창구 라는 표현을 많이 쓰고 있네요.</p>
+<p>창구라는 표현이 적절한듯 합니다.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/9/96/W3sDesign_Facade_Design_Pattern_UML.jpg" alt="UML"></p>
+<h2 id="왜쓸까"><a href="#%EC%99%9C%EC%93%B8%EA%B9%8C" aria-hidden="true"><span class="icon icon-link"></span></a>왜쓸까</h2>
+<p>디자인패턴하면서 매번 쓰는 표현인것 같지만...</p>
+<p>고객은 내부사정을 알 필요가 없습니다.</p>
+<p>그냥 컴퓨터 켜줘! 하면 컴퓨터가 알아서 켜져야 한다는거죠.</p>
+<p>프로그래머가 겪을만한 상황으로 적어보면,</p>
+<p>웹개발자, 서버개발자가 분리되어 있다고 할때,</p>
+<p>웹개발자는 서버개발자가 만들어놓은 method 하나만 띡! 호출하면 그만입니다.</p>
+<p>서버프로그래머에게 '이거 결과가 a가 아니라 b가 나와요' 하면 그만이죠.
+(현실은 둘다 혼자 개발...)</p>
+<p>온갖 method를 가지고 return받아서 브라우저에서 작업해서 보여줄 필요는 없습니다.</p>
+<p>복잡한 로직들은 서버에서 처리하고, 웹에선 적당한 곳에 보여주면 됩니다.</p>
+<p>그래야 웹과 서버간의 핑퐁하면서 테스트 해볼 필요도 적어지고, 검증도 쉽죠.</p>
+<h2 id="코드로보자"><a href="#%EC%BD%94%EB%93%9C%EB%A1%9C%EB%B3%B4%EC%9E%90" aria-hidden="true"><span class="icon icon-link"></span></a>코드로보자</h2>
+<p>책에 있는 예제보다, wiki에 있는 예제가 딱 알맞아 보여서 가져왔습니다.</p>
+<pre><code class="language-java">    / Complex parts */
+
+    class CPU {
+        public void freeze() { ... }
+        public void jump(long position) { ... }
+        public void execute() { ... }
+    }
+
+    class Memory {
+        public void load(long position, byte[] data) {
+            ...
+        }
+    }
+
+    class HardDrive {
+        public byte[] read(long lba, int size) {
+            ...
+        }
+    }
+
+    /* Façade */
+
+    class Computer {
+        public void startComputer() {
+            CPU cpu = new CPU();
+            Memory memory = new Memory();
+            HardDrive hardDrive = new HardDrive();
+            cpu.freeze();
+            memory.load(BOOT_ADDRESS, hardDrive.read(BOOT_SECTOR, SECTOR_SIZE));
+            cpu.jump(BOOT_ADDRESS);
+            cpu.execute();
+        }
+    }
+
+    /* Client */
+
+    class You {
+        public static void main(String[] args) throws ParseException {
+            Computer facade = /* grab a facade instance */;
+            facade.startComputer();
+        }
+    }
+</code></pre>
+<p>회사에서 쓰던 예제를 설명드리면, 웹 화면에서 facade method를 호출합니다.</p>
+<pre><code>서버측 구조
+
+BI (facde용 interface)
+FACDE(BI에 있는 내용 구현)
+VAS(조회로직) , FAS(저장로직)
+VDAO(조회쿼리), DDAO(저장쿼리)
+
+DTO(파라미터 통 or DB 테이블 구조)
+</code></pre>
+<p>FACDE에는 단순히 VAS 호출 정도만 있습니다.</p>
+<p>VAS에 들어가면, VAS에서 들어온 파라미터를 가지고 여기저기 VDAO에 접근해 쿼리를 읽어 취합한 결과를 return합니다.</p>
+<p>이런 구조라면 FACDE에서는 호출할 method정도만 가지고 있고,
+복잡한 로직은 VAS에서 관리하니, FACADE를 수정하거나 할 일이 거의 없습니다.</p>
+<p>쓰면서 느낀 단점은</p>
+<ol>
+<li>아주 쉬운 쿼리도 BI,FACDE,VAS,VDAO,DTO에 각각 만들어주어야 한다</li>
+<li>이미 다 구현되어 있으면, 너무나 편해서 개발자가 공부할 필요가 없어 나태해진다</li>
+<li>VAS/FAS 는 OOP적인 사고로 짜기 어려워진다. -> 미친듯이 복잡해진다.(좀더 유연하게 다른 패턴을 적용할 수 있는 구조여야...)</li>
+</ol>
+</div></article></section><footer>© 2017 <a>flybook</a>. All rights reserved.</footer></div></div>
+      </body>
+    </html>
+  

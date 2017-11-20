@@ -1,0 +1,110 @@
+
+    <!DOCTYPE html>
+    <html>
+      <meta charset="UTF-8" />
+      <title>Bridge</title>
+      <meta
+        name="description"
+        content="Bridge Pattern
+
+추상클래스를 구현클래스에서 분리해서 서로 독립적일 수 있도록 한다.
+
+(이말인 즉슨, 추상클래스끼리 상속이나 extedns/implements 를 하고"
+      />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <link
+        href="//fonts.googleapis.com/css?family=Rubik|Unica+One"
+        rel="stylesheet"
+      />
+      <link rel="stylesheet" href=".\static/css/normalize.css?f3c97be3b6d9ca15" />
+      <link rel="stylesheet" href=".\static/css/flexboxgrid.min.css?f3c97be3b6d9ca15" />
+      <link rel="stylesheet" href=".\static/css/github-flavored-markdown.css?f3c97be3b6d9ca15" />
+      <link rel="stylesheet" href=".\static/css/light.css?f3c97be3b6d9ca15" />
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css" />
+      <style>
+        body, .markdown-body {
+          font-family: "Rubik|Unica+One", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+      </style>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+      <script src=".\static/main.js?f3c97be3b6d9ca15"></script>
+      <body>
+        <div id="root"><div class="wrap container-fluid"><header class="site-header"><h1><a href="/">flybook</a></h1><nav class="nav-link"><a href="/">Home</a><a href="https://hearimm">Git</a><a href="#" class="more"><svg aria-hidden="true" class="octicon" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"></path></svg></a></nav></header><section class="row main"><aside class="col-xs-12 col-sm-3 col-md-3 col-lg-3"><div class="chap"><span class="chap-title"></span><ul><li class=""><a href=".%5Cadaptor.html">Adaptor</a></li><li class=""><a href=".%5Citerator.html">Iterator</a></li><li class=""><a href=".%5Ctemplate.html">Template</a></li><li class=""><a href=".%5CabstractFactory.html">Abstractfactory</a></li><li class="active"><a href=".%5Cbridge.html">Bridge</a></li><li class=""><a href=".%5Cbuilder.html">Builder</a></li><li class=""><a href=".%5CchainOfResponsibility.html">Chainofresponsibility</a></li><li class=""><a href=".%5CCommand.html">Command</a></li><li class=""><a href=".%5CeffectiveJavaBuild.html">Effectivejavabuild</a></li><li class=""><a href=".%5Cfacade.html">Facade</a></li><li class=""><a href=".%5CfactoryMethod.html">Factorymethod</a></li><li class=""><a href=".%5CflyWeight.html">Flyweight</a></li><li class=""><a href=".%5CInterpreter.html">Interpreter</a></li><li class=""><a href=".%5Cmediator.html">Mediator</a></li><li class=""><a href=".%5Cmemento.html">Memento</a></li><li class=""><a href=".%5Cobserver.html">Observer</a></li><li class=""><a href=".%5Cprototype.html">Prototype</a></li><li class=""><a href=".%5Cproxy.html">Proxy</a></li><li class=""><a href=".%5Csingleton.html">Singleton</a></li><li class=""><a href=".%5Cstate.html">State</a></li><li class=""><a href=".%5Cvisitor.html">Visitor</a></li></ul></div></aside><article class="col-xs-12 col-sm-9 col-md-9 col-lg-9"><div class="markdown-body"><h1 id="bridge-pattern"><a href="#bridge-pattern" aria-hidden="true"><span class="icon icon-link"></span></a>Bridge Pattern</h1>
+<ol>
+<li>추상클래스를 구현클래스에서 분리해서 서로 독립적일 수 있도록 한다.</li>
+</ol>
+<p>(이말인 즉슨, 추상클래스끼리 상속이나 extedns/implements 를 하고, 구현클래스 끼리 extedns/implements를 한다.)</p>
+<p>서로 독립적일때, 확장/수정 등에 용이하다.</p>
+<pre><code class="language-java">/** "Implementor" */
+interface DrawingAPI {
+    public void drawCircle(final double x, final double y, final double radius);
+}
+
+/** "ConcreteImplementor"  1/2 */
+class DrawingAPI1 implements DrawingAPI {
+    public void drawCircle(final double x, final double y, final double radius) {
+        System.out.printf("API1.circle at %f:%f radius %f\n", x, y, radius);
+    }
+}
+
+/** "ConcreteImplementor" 2/2 */
+class DrawingAPI2 implements DrawingAPI {
+    public void drawCircle(final double x, final double y, final double radius) {
+        System.out.printf("API2.circle at %f:%f radius %f\n", x, y, radius);
+    }
+}
+
+/** "Abstraction" */
+abstract class Shape {
+    //Abstraction에 Implementor를 필드로 가지고 작업한다!(다리 역할)
+    protected DrawingAPI drawingAPI;
+
+    protected Shape(final DrawingAPI drawingAPI){
+        this.drawingAPI = drawingAPI;
+    }
+
+    public abstract void draw();                                 // low-level
+    public abstract void resizeByPercentage(final double pct);   // high-level
+}
+
+/** "Refined Abstraction" */
+class CircleShape extends Shape {
+    private double x, y, radius;
+    public CircleShape(final double x, final double y, final double radius, final DrawingAPI drawingAPI) {
+        super(drawingAPI);
+        this.x = x;  this.y = y;  this.radius = radius;
+    }
+
+    // low-level i.e. Implementation specific
+    public void draw() {
+        drawingAPI.drawCircle(x, y, radius);
+    }
+    // high-level i.e. Abstraction specific
+    public void resizeByPercentage(final double pct) {
+        //drawingAPI(구현클래스 쪽)에 접근하지 않고 추상클래스에서만의 작업
+        //생성할때, 받은 radius만으로 작업
+        //구현 클래스에 상속될 내용이 아니라서, Abstraction 쪽에만 수정해 주면 된다.
+        radius *= (1.0 + pct/100.0);
+    }
+}
+
+/** "Client" */
+class BridgePattern {
+    public static void main(final String[] args) {
+        Shape[] shapes = new Shape[] {
+            new CircleShape(1, 2, 3, new DrawingAPI1()),
+            new CircleShape(5, 7, 11, new DrawingAPI2())
+        };
+
+        for (Shape shape : shapes) {
+            shape.resizeByPercentage(2.5);
+            shape.draw();
+        }
+    }
+}
+</code></pre>
+</div></article></section><footer>© 2017 <a>flybook</a>. All rights reserved.</footer></div></div>
+      </body>
+    </html>
+  
